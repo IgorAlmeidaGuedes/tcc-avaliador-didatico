@@ -44,6 +44,13 @@ export default function Register() {
             });
 
             if (signUpError) {
+                if (signUpError.message?.toLowerCase().includes('already')) {
+                    setError(
+                        'Este e-mail já está registrado. Tente fazer login.'
+                    );
+                    return;
+                }
+
                 setError('Erro ao criar usuário.');
                 return;
             }
