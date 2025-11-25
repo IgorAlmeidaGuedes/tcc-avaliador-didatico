@@ -30,10 +30,13 @@ export default function AppRoutes() {
     const [userName, setUserName] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    // 🔥 NOVO: escuta mudanças de login/logout
     useEffect(() => {
-        const { data: listener } = supabase.auth.onAuthStateChange(() => {
-            window.location.reload();
+        const { data: listener } = supabase.auth.onAuthStateChange((event) => {
+            console.log('Evento de auth:', event);
+
+            if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+                window.location.reload();
+            }
         });
 
         return () => listener.subscription.unsubscribe();
