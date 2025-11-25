@@ -71,6 +71,11 @@ export default function Register() {
                 ]);
 
             if (insertError) {
+                if (insertError.message?.toLowerCase().includes('duplicate')) {
+                    setError('Este e-mail já possui cadastro no sistema.');
+                    return;
+                }
+
                 setError('Erro ao salvar informações do usuário.');
                 return;
             }
