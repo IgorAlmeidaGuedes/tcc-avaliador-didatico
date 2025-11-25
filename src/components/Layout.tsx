@@ -1,0 +1,36 @@
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/AppSidebar';
+import { ThemeToggle } from './ThemeToggle';
+
+interface LayoutProps {
+    children?: React.ReactNode;
+    userName?: string | null;
+}
+
+export function Layout({ children, userName }: LayoutProps) {
+    return (
+        <SidebarProvider>
+            <div className="flex min-h-screen w-full">
+                <AppSidebar userName={userName} />
+
+                <main className="flex-1 w-full">
+                    <div
+                        className="
+    sticky top-0 z-20 bg-background/80 backdrop-blur-sm 
+    border-b border-border h-12 px-4 
+    flex items-center justify-between
+"
+                    >
+                        {/* Botão abre/fecha sidebar */}
+                        <SidebarTrigger />
+
+                        {/* Botão de trocar tema sempre visível */}
+                        <ThemeToggle />
+                    </div>
+
+                    <div className="p-6 md:p-8 lg:p-12">{children}</div>
+                </main>
+            </div>
+        </SidebarProvider>
+    );
+}
