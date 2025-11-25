@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { supabase } from '../../services/supabase';
-import { useNavigate, Link } from 'react-router-dom';
+// import { useNavigate, Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,9 +14,10 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { Link } from 'lucide-react';
 
 export default function Login() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState<string | null>(null);
@@ -27,31 +29,23 @@ export default function Login() {
         setIsLoading(true);
 
         try {
-            console.log('📨 Enviando login...', { email });
-
             const { data, error } = await supabase.auth.signInWithPassword({
                 email,
                 password,
             });
 
-            console.log('🔍 LOGIN RESPONSE:', { data, error });
-
             if (error) {
-                console.log('❌ Erro retornado:', error);
                 setMessage('Credenciais inválidas.');
                 return;
             }
 
             if (data?.session) {
-                console.log('✅ Sessão criada:', data.session);
-                navigate('/dashboard');
+                window.location.href = '/dashboard';
                 return;
             }
 
-            console.log('⚠️ Login sem erro, mas sem sessão:', data);
             setMessage('Erro inesperado.');
         } catch (err) {
-            console.log('💥 EXCEÇÃO NO LOGIN:', err);
             setMessage('Erro inesperado.');
         } finally {
             setIsLoading(false);

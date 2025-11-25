@@ -30,12 +30,23 @@ export default function AppRoutes() {
     const [userName, setUserName] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // 🔥 NOVO: escuta mudanças de login/logout
+    useEffect(() => {
+        const { data: listener } = supabase.auth.onAuthStateChange(() => {
+            window.location.reload();
+        });
+
+        return () => listener.subscription.unsubscribe();
+    }, []);
+
     useEffect(() => {
         const loadUser = async () => {
             const { data, error: sessionError } =
                 await supabase.auth.getSession();
 
-            if (sessionError) console.error('❌ Erro na sessão:', sessionError);
+            if (sessionError) {
+                console.error('❌ Erro na sessão:', sessionError);
+            }
 
             if (!data.session) {
                 setIsUserLogged(false);
@@ -95,7 +106,6 @@ export default function AppRoutes() {
                     path="/dashboard"
                     element={
                         <PrivateRoute isUserLogged={isUserLogged}>
-                            {/* agora SÓ renderiza o layout quando userName existe */}
                             <Layout userName={userName}>
                                 <Outlet />
                             </Layout>
