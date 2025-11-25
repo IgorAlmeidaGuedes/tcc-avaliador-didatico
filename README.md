@@ -1,73 +1,171 @@
-# React + TypeScript + Vite
+# Avaliador Didático da Computação
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema Web de Autoavaliação Docente baseado no **Hexágono Didático da Computação**
 
-Currently, two official plugins are available:
+### 👨‍💻 Autor: Ígor Almeida Guedes
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🎓 Curso: Sistemas de Informação
 
-## React Compiler
+### 👨‍🏫 Orientador: Prof. Ronney Moreira de Castro
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 📄 Base teórica: _Hexágono Didático da Computação_ de Castro (2019)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📌 Visão Geral
 
-```js
-export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            // Other configs...
+Este repositório contém o código-fonte do artefato computacional desenvolvido como parte do Trabalho de Conclusão de Curso.  
+O sistema tem como objetivo **auxiliar docentes de Computação a diagnosticar e refletir sobre suas práticas pedagógicas**, utilizando como referência o **Hexágono Didático da Computação**, um modelo orientado ao planejamento didático fundamentado na Aprendizagem Ativa.
 
-            // Remove tseslint.configs.recommended and replace with this
-            tseslint.configs.recommendedTypeChecked,
-            // Alternatively, use this for stricter rules
-            tseslint.configs.strictTypeChecked,
-            // Optionally, add this for stylistic rules
-            tseslint.configs.stylisticTypeChecked,
+O sistema permite que o docente:
 
-            // Other configs...
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-]);
+-   responda um questionário inteligente baseado nas seis dimensões do Hexágono;
+-   receba um **perfil visual** representado em um hexágono SVG personalizado;
+-   visualize pontos fortes e fracos da prática docente;
+-   leia descrições explicativas das dimensões com desempenho insuficiente;
+-   acesse e baixe relatórios anteriores em um painel histórico.
+
+---
+
+## 🎯 Objetivo Geral
+
+Desenvolver uma aplicação web que permita diagnosticar a prática pedagógica do docente a partir das dimensões do Hexágono Didático da Computação, apresentando um relatório visual e interpretativo para apoio à reflexão profissional.
+
+---
+
+## 🧩 Funcionalidades Principais
+
+### ✔️ Questionário Inteligente
+
+-   Estruturado de acordo com o Hexágono Didático da Computação.
+-   Perguntas sorteadas **aleatoriamente** por tipo.
+-   Evita **repetição de perguntas** dentro do mesmo tipo.
+-   Resposta "Parcialmente" → apresenta novas perguntas do mesmo tipo até esgotar.
+
+### ✔️ Geração Automática do Hexágono
+
+-   Construção de um **SVG dinâmico** contendo:
+    -   vértices identificados (Professor, Aluno, Conteúdo, etc.);
+    -   cores indicando equilíbrio (verde) ou fragilidade (vermelho);
+    -   explicações detalhadas de cada relação frágil.
+
+### ✔️ Relatórios Salvos
+
+-   Cada preenchimento gera um relatório em SVG salvo no Supabase.
+-   Interface com miniaturas estilo “galeria” para listar relatórios.
+-   Possibilidade de download do arquivo.
+
+### ✔️ Autenticação
+
+-   Login de usuários via Supabase Auth.
+-   Cada docente vê apenas seus próprios relatórios.
+
+### ✔️ Interface Moderna
+
+-   Sidebar dinâmica (shadcn/ui).
+-   Topbar fixa com botão de alternância de tema.
+-   Layout responsivo e clean.
+
+---
+
+## 🧱 Arquitetura e Tecnologias
+
+| Tecnologia                        | Função                                       |
+| --------------------------------- | -------------------------------------------- |
+| **React + Vite**                  | Interface do sistema                         |
+| **TypeScript**                    | Tipagem estática                             |
+| **Supabase**                      | Banco de dados, autenticação e armazenamento |
+| **shadcn/ui**                     | Componentes estilizados                      |
+| **TailwindCSS**                   | Estilização                                  |
+| **Lucide Icons**                  | Ícones                                       |
+| **Vercel**                        | Deploy recomendado                           |
+| **Design Science Research (DSR)** | Base metodológica                            |
+
+---
+
+## 🗂️ Estrutura do Projeto
+
+```
+src/
+├─ app/
+│ ├─ App.tsx
+│ └─ routes.tsx
+│
+├─ components/
+│ ├─ Hexagon.tsx
+│ ├─ ThemeToggle.tsx
+│ ├─ theme-provider.tsx
+│ └─ AppSidebar.tsx
+│
+├─ pages/
+│ ├─ Questionnaire.tsx
+│ ├─ Form.tsx
+│ ├─ Reports.tsx
+│ └─ ReportDetails.tsx
+│
+├─ services/
+│ └─ supabase.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Como executar localmente
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### 1. Clonar o repositório
 
-export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            // Other configs...
-            // Enable lint rules for React
-            reactX.configs['recommended-typescript'],
-            // Enable lint rules for React DOM
-            reactDom.configs.recommended,
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-]);
+```bash
+git clone https://github.com/IgorAlmeidaGuedes/tcc-avaliador-didatico.git
+cd tcc-avaliador-didatico
 ```
+
+### 2. Instalar dependências
+
+```bash
+npm install
+```
+
+### 3. Criar arquivo .env
+
+```ini
+VITE_SUPABASE_URL=sua-url
+VITE_SUPABASE_ANON_KEY=sua-key
+```
+
+### 4. Executar o projeto
+
+```bash
+npm run dev
+```
+
+## 🌐 Deploy (Vercel)
+
+1. Suba o projeto para o GitHub
+2. Acesse https://vercel.com
+3. Importe o repositório
+4. Adicione as variáveis de ambiente:
+
+```ini
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+```
+
+5. Finalize o deploy automático 🎉
+
+## 📊 Fundamentação Teórica (Resumo)
+
+Este sistema foi desenvolvido com base no modelo **Hexágono Didático da Computação**, que organiza a prática docente em seis dimensões interdependentes: **Objetivos, Conteúdo, Professor, Aluno, Técnicas/Recursos e Condições**.
+
+Esse modelo foi utilizado como referência conceitual para guiar o desenvolvimento do artefato, conforme a abordagem **Design Science Research (DSR)**, fundamentada em _Hevner et al. (2004)_.
+
+---
+
+## 🏁 Status do Projeto
+
+-   ✔ Totalmente funcional
+-   ✔ Questionário dinâmico com perguntas aleatórias
+-   ✔ Geração de relatórios em SVG
+-   ✔ Histórico completo para cada usuário
+-   ✔ Pronto para deploy público
+
+## 📬 Contato
+
+**Ígor Almeida Guedes**  
+📧 **guedes.igor018@gmail.com**
