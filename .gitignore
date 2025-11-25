@@ -23,9 +23,6 @@ dist-ssr
 .env.production
 .env.test
 
-# Supabase keys (caso estejam em um arquivo TS)
-src/services/supabase.ts
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
