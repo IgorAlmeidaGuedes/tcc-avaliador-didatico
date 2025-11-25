@@ -34,7 +34,25 @@ export default function Login() {
             });
 
             if (error) {
+                if (
+                    error.message?.toLowerCase().includes('email not confirmed')
+                ) {
+                    setMessage(
+                        'Seu e-mail ainda não foi confirmado. Verifique sua caixa de entrada.'
+                    );
+                    return;
+                }
+
                 setMessage('Credenciais inválidas.');
+                return;
+            }
+
+            if (data?.user && !data.user.email_confirmed_at) {
+                setMessage(
+                    'Seu e-mail ainda não foi confirmado. Verifique sua caixa de entrada.'
+                );
+
+                await supabase.auth.signOut();
                 return;
             }
 
