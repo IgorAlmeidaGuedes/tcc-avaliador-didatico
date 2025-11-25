@@ -92,16 +92,30 @@ src/
 │ └─ routes.tsx
 │
 ├─ components/
+│ ├─ AppSidebar.tsx
 │ ├─ Hexagon.tsx
-│ ├─ ThemeToggle.tsx
+│ ├─ Layout.tsx
+│ ├─ NavLink.tsx
+│ ├─ PrivateRoute.tsx
+│ ├─ Sidebar.tsx
 │ ├─ theme-provider.tsx
-│ └─ AppSidebar.tsx
+│ └─ ThemeToggle.tsx
 │
 ├─ pages/
-│ ├─ Questionnaire.tsx
-│ ├─ Form.tsx
-│ ├─ Reports.tsx
-│ └─ ReportDetails.tsx
+├─────Auth/
+│    ├─ Login.tsx
+│    └─ Register.tsx
+├─────Dashboard/
+│    ├─ Form.tsx
+│    ├─ Home.tsx
+│    ├─ Information.tsx
+│    ├─ Questionnaire.tsx
+│    ├─ ReportDetails.tsx
+│    └─ Reports.tsx
+│
+├─ /styles
+│ ├─ form.css
+│ └─ globals.css
 │
 ├─ services/
 │ └─ supabase.ts
