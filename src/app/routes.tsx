@@ -31,18 +31,6 @@ export default function AppRoutes() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const { data: listener } = supabase.auth.onAuthStateChange((event) => {
-            console.log('Evento de auth:', event);
-
-            if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
-                window.location.reload();
-            }
-        });
-
-        return () => listener.subscription.unsubscribe();
-    }, []);
-
-    useEffect(() => {
         const loadUser = async () => {
             const { data, error: sessionError } =
                 await supabase.auth.getSession();
