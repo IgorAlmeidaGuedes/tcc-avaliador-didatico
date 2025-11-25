@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { supabase } from '../../services/supabase';
-// import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,7 +14,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Link } from 'lucide-react';
 
 export default function Login() {
     // const navigate = useNavigate();
