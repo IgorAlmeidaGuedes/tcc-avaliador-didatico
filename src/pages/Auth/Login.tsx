@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/card';
 
 export default function Login() {
-    // const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState<string | null>(null);
@@ -103,6 +102,15 @@ export default function Login() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                        </div>
+
+                        <div className="text-right">
+                            <Link
+                                to="/forgot-password"
+                                className="text-sm text-primary hover:underline"
+                            >
+                                Esqueci minha senha
+                            </Link>
                         </div>
 
                         {message && (

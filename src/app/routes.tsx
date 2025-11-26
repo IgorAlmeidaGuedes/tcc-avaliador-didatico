@@ -8,6 +8,8 @@ import {
 
 import { useEffect, useState } from 'react';
 import { supabase } from '../services/supabase';
+import ForgotPassword from '../pages/Auth/ForgotPassword';
+import ResetPassword from '../pages/Auth/ResetPassword';
 
 // Páginas públicas
 import Login from '../pages/Auth/Login';
@@ -91,6 +93,8 @@ export default function AppRoutes() {
                 {/* ROTAS PÚBLICAS */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
 
                 {/* ROTAS PRIVADAS COM LAYOUT */}
                 <Route
