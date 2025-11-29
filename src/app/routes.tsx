@@ -15,10 +15,10 @@ import ResetPassword from '../pages/Auth/ResetPassword';
 import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
 
-import { Layout } from '@/components/Layout';
+import { Layout } from '@/components/layout/Layout';
 
 // Proteção
-import PrivateRoute from '../components/PrivateRoute';
+import PrivateRoute from '../components/auth/PrivateRoute';
 
 // Páginas internas
 import HomePage from '../pages/Dashboard/Home';

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, ArrowRight } from 'lucide-react';
-import { NavLink } from '@/components/NavLink';
+import { NavLink } from '@/components/navigation/NavLink';
 
 const Home = () => {
     const hexagonElements = [

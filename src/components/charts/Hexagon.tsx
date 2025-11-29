@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../services/supabase';
+import { ARESTAS } from '../../data/arestas';
 
 interface HexagonChartProps {
     result: Record<number, boolean>;
@@ -10,36 +10,16 @@ interface HexagonChartProps {
 interface TipoDescricao {
     id: number;
     nome: string;
-    descricao: string;
+    descricao: string; // HTML convertido do Markdown
 }
 
 const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
-    const [tipos, setTipos] = useState<TipoDescricao[]>([]);
-    const [hasError, setHasError] = useState(false);
+    // Agora os textos vêm da pasta data/arestas
+    const [tipos] = useState<TipoDescricao[]>(ARESTAS);
 
     useEffect(() => {
-        async function loadData() {
-            const { data, error } = await supabase
-                .from('tipos_pergunta')
-                .select('*')
-                .order('id', { ascending: true });
-
-            if (error) {
-                setHasError(true);
-                return;
-            }
-
-            setTipos(data ?? []);
-        }
-
-        loadData();
-    }, []);
-
-    useEffect(() => {
-        if (tipos.length > 0 && onReady) {
-            onReady();
-        }
-    }, [tipos, onReady]);
+        onReady?.();
+    }, [onReady]);
 
     const tiposNegativos = tipos.filter((t) => result[t.id] === false);
 
@@ -94,14 +74,6 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
 
         { from: 3, to: 5, type: 15 }, // Técnicas e Recursos - Organização/Sociedade
     ];
-
-    if (hasError) {
-        return (
-            <p style={{ color: 'red', textAlign: 'center', marginTop: '40px' }}>
-                Erro ao carregar dados do gráfico.
-            </p>
-        );
-    }
 
     const MIN_HEIGHT = 500;
     const svgHeight = Math.max(MIN_HEIGHT, 400 + tiposNegativos.length * 60);
@@ -187,7 +159,14 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                                 textAlign: 'left',
                             }}
                         >
-                            <strong>{t.nome}</strong>: {t.descricao}
+                            <p>
+                                <strong>{t.nome}</strong>
+                            </p>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: t.descricao,
+                                }}
+                            />
                         </div>
                     </foreignObject>
                 ))}

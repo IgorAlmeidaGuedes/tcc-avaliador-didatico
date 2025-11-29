@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { supabase } from '../services/supabase';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { supabase } from '../../services/supabase';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 interface TopbarProps {
     userName: string | null;

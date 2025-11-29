@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Questionnaire from './Questionnaire';
-import Hexagon from '../../components/Hexagon';
+import Hexagon from '../../components/charts/Hexagon';
 import { supabase } from '../../services/supabase';
 
 export default function Form() {

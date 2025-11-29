@@ -1,6 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/AppSidebar';
-import { ThemeToggle } from './ThemeToggle';
+import { AppSidebar } from '@/components/navigation/AppSidebar';
+import { ThemeToggle } from './../theme/ThemeToggle';
 
 interface LayoutProps {
     children?: React.ReactNode;

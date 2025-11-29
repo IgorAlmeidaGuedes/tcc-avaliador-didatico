@@ -10,7 +10,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { NavLink } from '@/components/NavLink';
+import { NavLink } from '@/components/navigation/NavLink';
 import { supabase } from '@/services/supabase';
 import { useNavigate } from 'react-router-dom';
 
