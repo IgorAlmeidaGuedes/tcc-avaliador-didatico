@@ -18,6 +18,9 @@ export default function ForgotPassword() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [messageType, setMessageType] = useState<'success' | 'error'>(
+        'error'
+    );
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,6 +36,7 @@ export default function ForgotPassword() {
             setMessage('Erro ao enviar o link. Verifique o email informado.');
         } else {
             setMessage('Enviamos um link de recuperação para seu e-mail.');
+            setMessageType('success');
         }
 
         setIsLoading(false);
@@ -65,7 +69,13 @@ export default function ForgotPassword() {
                         </div>
 
                         {message && (
-                            <p className="text-sm text-center text-red-500">
+                            <p
+                                className={`text-sm text-center ${
+                                    messageType === 'success'
+                                        ? 'text-green-600'
+                                        : 'text-red-500'
+                                }`}
+                            >
                                 {message}
                             </p>
                         )}
