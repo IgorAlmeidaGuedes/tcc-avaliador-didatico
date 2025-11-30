@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ARESTAS } from '../../data/arestas';
 
 interface HexagonChartProps {
@@ -10,18 +10,31 @@ interface HexagonChartProps {
 interface TipoDescricao {
     id: number;
     nome: string;
-    descricao: string; // HTML convertido do Markdown
+    descricao: string; // HTML vindo do markdown
 }
 
 const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
-    // Agora os textos vêm da pasta data/arestas
     const [tipos] = useState<TipoDescricao[]>(ARESTAS);
+
+    const measureRef = useRef<HTMLDivElement>(null);
+    const [contentHeight, setContentHeight] = useState(0);
 
     useEffect(() => {
         onReady?.();
     }, [onReady]);
 
     const tiposNegativos = tipos.filter((t) => result[t.id] === false);
+
+    useEffect(() => {
+        if (measureRef.current) {
+            const rect = measureRef.current.getBoundingClientRect();
+            setContentHeight(rect.height);
+        }
+    }, [tiposNegativos]);
+
+    const BASE_HEIGHT = 360;
+    const PADDING_BOTTOM = 40;
+    const svgHeight = BASE_HEIGHT + contentHeight + PADDING_BOTTOM;
 
     const radius = 100;
     const center = { x: 500, y: 175 };
@@ -52,7 +65,6 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
         };
     });
 
-    // ---- Mapeamento exato dos 15 tipos ----
     const edges = [
         { from: 0, to: 1, type: 1 }, // Professor - Objetivos
         { from: 1, to: 2, type: 2 }, // Objetivos - Aluno
@@ -75,103 +87,122 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
         { from: 3, to: 5, type: 15 }, // Técnicas e Recursos - Organização/Sociedade
     ];
 
-    const MIN_HEIGHT = 500;
-    const svgHeight = Math.max(MIN_HEIGHT, 400 + tiposNegativos.length * 60);
-
     return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '40px',
-                width: '100%',
-            }}
-        >
-            <svg
-                ref={svgRef}
-                width="100%"
-                height={svgHeight}
-                viewBox={`0 0 960 ${svgHeight}`}
-                preserveAspectRatio="xMidYMid meet"
+        <>
+            {/* INVISIBLE MEASUREMENT BLOCK */}
+            <div
+                ref={measureRef}
+                style={{
+                    position: 'absolute',
+                    visibility: 'hidden',
+                    width: 900,
+                    pointerEvents: 'none',
+                    whiteSpace: 'normal',
+                }}
             >
-                <rect width="100%" height="100%" fill="white" />
+                {tiposNegativos.map((t) => (
+                    <div key={t.id} style={{ marginBottom: 30 }}>
+                        <div
+                            dangerouslySetInnerHTML={{ __html: t.descricao }}
+                            style={{ whiteSpace: 'normal' }}
+                        />
+                    </div>
+                ))}
+            </div>
 
-                {/* Linhas */}
-                {edges.map(({ from, to, type }) => {
-                    const color = result[type] ? 'green' : 'red';
-                    return (
+            {/* SVG */}
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '40px',
+                    width: '100%',
+                }}
+            >
+                <svg
+                    ref={svgRef}
+                    width="100%"
+                    height={svgHeight}
+                    viewBox={`0 0 960 ${svgHeight}`}
+                    preserveAspectRatio="xMidYMid meet"
+                >
+                    <rect width="100%" height="100%" fill="white" />
+
+                    {/* Linhas */}
+                    {edges.map(({ from, to, type }) => (
                         <line
                             key={type}
                             x1={points[from].x}
                             y1={points[from].y}
                             x2={points[to].x}
                             y2={points[to].y}
-                            stroke={color}
+                            stroke={result[type] ? 'green' : 'red'}
                             strokeWidth="2"
                             opacity={0.9}
                         />
-                    );
-                })}
+                    ))}
 
-                {/* Pontos e textos */}
-                {points.map((p, i) => (
-                    <g key={i}>
-                        <circle cx={p.x} cy={p.y} r="6" fill="#333" />
+                    {/* Pontos e textos */}
+                    {points.map((p, i) => (
+                        <g key={i}>
+                            <circle cx={p.x} cy={p.y} r="6" fill="#333" />
 
-                        <text
-                            x={p.x + labelOffsets[i].dx}
-                            y={p.y + labelOffsets[i].dy}
-                            textAnchor="middle"
-                            fontSize="12"
-                            fill="#000"
-                            fontWeight="bold"
-                        >
-                            {Array.isArray(vertexLabels[i])
-                                ? vertexLabels[i].map((line, idx) => (
-                                      <tspan
-                                          key={idx}
-                                          x={p.x + labelOffsets[i].dx}
-                                          dy={idx === 0 ? 0 : 12}
-                                      >
-                                          {line}
-                                      </tspan>
-                                  ))
-                                : vertexLabels[i]}
-                        </text>
-                    </g>
-                ))}
+                            <text
+                                x={p.x + labelOffsets[i].dx}
+                                y={p.y + labelOffsets[i].dy}
+                                textAnchor="middle"
+                                fontSize="12"
+                                fill="#000"
+                                fontWeight="bold"
+                            >
+                                {Array.isArray(vertexLabels[i])
+                                    ? vertexLabels[i].map((line, idx) => (
+                                          <tspan
+                                              key={idx}
+                                              x={p.x + labelOffsets[i].dx}
+                                              dy={idx === 0 ? 0 : 12}
+                                          >
+                                              {line}
+                                          </tspan>
+                                      ))
+                                    : vertexLabels[i]}
+                            </text>
+                        </g>
+                    ))}
 
-                {/* Textos negativos */}
-                {tiposNegativos.map((t, index) => (
+                    {/* TEXTOS NEGATIVOS */}
                     <foreignObject
-                        key={t.id}
                         x={20}
-                        y={350 + index * 60}
+                        y={350}
                         width={900}
-                        height={120}
+                        height={contentHeight + 50}
                     >
                         <div
                             style={{
-                                fontSize: '13px',
-                                lineHeight: '1.4',
+                                fontSize: '14px',
+                                lineHeight: '1.6',
                                 fontFamily: 'Arial, sans-serif',
                                 color: '#000',
                                 textAlign: 'left',
+                                whiteSpace: 'normal',
+                                padding: '10px 5px',
                             }}
                         >
-                            <p>
-                                <strong>{t.nome}</strong>
-                            </p>
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: t.descricao,
-                                }}
-                            />
+                            {tiposNegativos.map((t) => (
+                                <div key={t.id} style={{ marginBottom: 30 }}>
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: t.descricao,
+                                        }}
+                                        style={{ whiteSpace: 'normal' }}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </foreignObject>
-                ))}
-            </svg>
-        </div>
+                </svg>
+            </div>
+        </>
     );
 };
 
