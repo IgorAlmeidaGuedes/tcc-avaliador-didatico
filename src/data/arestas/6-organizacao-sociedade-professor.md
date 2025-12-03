@@ -4,12 +4,12 @@ Esta conexão expressa o quanto o trabalho do professor é influenciado, apoiado
 
 Quando esta aresta aparece como **não preenchida**, isso indica que o professor pode estar enfrentando **desconexões entre seu planejamento/ação pedagógica e o contexto em que está inserido**. Em geral, isso ocorre em situações como:
 
--   falta de infraestrutura, materiais ou recursos tecnológicos que inviabilizam estratégias planejadas;
--   demandas institucionais que entram em conflito com o tempo, o ritmo ou as necessidades da aprendizagem;
--   cultura organizacional pouco aberta à inovação, flexibilização ou diálogo pedagógico;
--   pressões sociais, culturais ou administrativas que limitam a autonomia docente;
--   ausência de apoio institucional para formação continuada, acompanhamento ou reflexão pedagógica;
--   expectativas externas que não consideram a realidade da turma ou as condições reais de ensino.
+-   Falta de infraestrutura, materiais ou recursos tecnológicos que inviabilizam estratégias planejadas;
+-   Demandas institucionais que entram em conflito com o tempo, o ritmo ou as necessidades da aprendizagem;
+-   Cultura organizacional pouco aberta à inovação, flexibilização ou diálogo pedagógico;
+-   Pressões sociais, culturais ou administrativas que limitam a autonomia docente;
+-   Ausência de apoio institucional para formação continuada, acompanhamento ou reflexão pedagógica;
+-   Expectativas externas que não consideram a realidade da turma ou as condições reais de ensino.
 
 A ausência desta conexão não é culpa do professor, mas evidencia que **o ambiente institucional e social não tem oferecido as condições necessárias para que a prática docente se desenvolva plenamente**. Quando isso acontece, o professor pode sentir-se limitado em suas escolhas metodológicas, sobrecarregado ou impedido de implementar o que considera pedagogicamente adequado.
 

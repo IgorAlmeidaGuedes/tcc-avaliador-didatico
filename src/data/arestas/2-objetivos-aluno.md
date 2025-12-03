@@ -4,11 +4,11 @@ Esta conexão expressa o quanto os objetivos da disciplina dialogam com as carac
 
 Quando esta aresta aparece como **não preenchida**, isso indica que os objetivos da disciplina podem **não estar alinhados ao perfil dos estudantes**, gerando distanciamento entre o que se espera que eles aprendam e o que eles efetivamente conseguem compreender, valorizar ou realizar. Isso tende a ocorrer em situações como:
 
--   objetivos formulados em termos muito gerais ou abstratos, sem conexão com a realidade da turma;
--   expectativas de aprendizagem incompatíveis com o nível de conhecimento prévio dos estudantes;
--   metas que não consideram ritmos de aprendizagem, diversidade ou necessidades específicas presentes na turma;
--   pouca escuta das percepções dos alunos sobre dificuldades, interesses ou expectativas;
--   falta de clareza, para os próprios estudantes, sobre a utilidade e relevância dos objetivos da disciplina.
+-   Objetivos formulados em termos muito gerais ou abstratos, sem conexão com a realidade da turma;
+-   Expectativas de aprendizagem incompatíveis com o nível de conhecimento prévio dos estudantes;
+-   Metas que não consideram ritmos de aprendizagem, diversidade ou necessidades específicas presentes na turma;
+-   Pouca escuta das percepções dos alunos sobre dificuldades, interesses ou expectativas;
+-   Falta de clareza, para os próprios estudantes, sobre a utilidade e relevância dos objetivos da disciplina.
 
 A ausência desta conexão não aponta falta de empenho docente, mas revela que **os objetivos ainda não foram traduzidos em propósitos que os alunos reconhecem como significativos**. Quando isso ocorre, a aprendizagem pode se tornar menos engajadora, e o estudante tende a desenvolver uma relação mais superficial com os conteúdos.
 

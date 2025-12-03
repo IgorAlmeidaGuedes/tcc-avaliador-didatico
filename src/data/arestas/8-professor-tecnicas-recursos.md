@@ -4,12 +4,12 @@ Esta conexão expressa como o professor seleciona, adapta e utiliza técnicas, e
 
 Quando esta aresta aparece como **não preenchida**, isso indica que as técnicas e recursos utilizados podem **não estar sendo escolhidos ou aplicados de maneira plenamente consistente**, comprometendo o potencial didático da aula. Em geral, isso ocorre em situações como:
 
--   uso de técnicas baseadas apenas no hábito ou na preferência pessoal, sem considerar o tipo de conteúdo ou perfil dos alunos;
--   pouca variedade metodológica, dificultando o atendimento a diferentes formas de aprendizagem;
--   escolha de recursos que não dialogam com os objetivos da aula ou não favorecem o entendimento;
--   dificuldade em adaptar materiais e estratégias quando algo não funciona como esperado;
--   desconhecimento ou pouco uso de ferramentas pedagógicas mais atuais;
--   planejamento metodológico pouco consciente ou pouco fundamentado.
+-   Uso de técnicas baseadas apenas no hábito ou na preferência pessoal, sem considerar o tipo de conteúdo ou perfil dos alunos;
+-   Pouca variedade metodológica, dificultando o atendimento a diferentes formas de aprendizagem;
+-   Escolha de recursos que não dialogam com os objetivos da aula ou não favorecem o entendimento;
+-   Dificuldade em adaptar materiais e estratégias quando algo não funciona como esperado;
+-   Desconhecimento ou pouco uso de ferramentas pedagógicas mais atuais;
+-   Planejamento metodológico pouco consciente ou pouco fundamentado.
 
 A ausência desta conexão não significa falta de competência pedagógica, mas aponta que **as escolhas metodológicas podem estar desconectadas da finalidade do ensino** ou pouco ajustadas ao contexto. Isso pode resultar em aulas menos dinâmicas, menor engajamento ou dificuldade dos estudantes em acompanhar o raciocínio proposto.
 

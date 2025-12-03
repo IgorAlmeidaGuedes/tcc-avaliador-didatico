@@ -4,11 +4,11 @@ Esta conexão expressa o quanto o conteúdo ensinado na disciplina dialoga com o
 
 Quando esta aresta aparece como **não preenchida**, isso indica que o conteúdo trabalhado pode **não estar sendo conectado de maneira clara** às realidades externas à sala de aula. Nesses casos, o estudante tende a perceber o conteúdo como algo distante, teórico demais ou pouco aplicável. Isso costuma acontecer quando:
 
--   os conteúdos são apresentados de forma excessivamente abstrata, sem exemplos ou aplicações concretas;
--   falta contextualização que relacione o tema aos desafios, tecnologias, práticas profissionais ou questões sociais atuais;
--   as aulas não exploram situações reais onde o conteúdo é útil ou necessário;
--   o professor não considera o repertório cultural, social ou profissional dos alunos ao tratar dos conceitos;
--   os alunos têm dificuldade em perceber por que aquele conteúdo importa ou onde será utilizado.
+-   Os conteúdos são apresentados de forma excessivamente abstrata, sem exemplos ou aplicações concretas;
+-   Falta contextualização que relacione o tema aos desafios, tecnologias, práticas profissionais ou questões sociais atuais;
+-   As aulas não exploram situações reais onde o conteúdo é útil ou necessário;
+-   O professor não considera o repertório cultural, social ou profissional dos alunos ao tratar dos conceitos;
+-   Os alunos têm dificuldade em perceber por que aquele conteúdo importa ou onde será utilizado.
 
 A ausência desta conexão não significa que o conteúdo é inadequado, mas sugere que **a ponte entre o conhecimento acadêmico e o mundo real não foi suficientemente construída**. Sem essa articulação, diminui-se o engajamento, o sentido da aprendizagem e a capacidade do estudante de aplicar o que aprendeu fora da sala de aula.
 

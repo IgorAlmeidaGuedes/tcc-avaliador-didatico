@@ -4,10 +4,10 @@ Esta conexão representa se o professor consegue **transformar os objetivos da d
 
 Quando essa aresta aparece como **não preenchida**, isso indica que os objetivos da disciplina **podem não ter orientado de maneira consistente o planejamento do professor**. Isso pode acontecer em situações como:
 
--   dificuldade em interpretar de forma detalhada os objetivos formais da disciplina;
--   foco maior na escolha de conteúdos ou atividades isoladas, sem conexão explícita com o propósito da aprendizagem;
--   percepção limitada sobre o que se espera do desenvolvimento dos alunos ao término da disciplina;
--   planejamento centrado nas rotinas habituais do docente, e não naquilo que a disciplina pretende alcançar.
+-   Dificuldade em interpretar de forma detalhada os objetivos formais da disciplina;
+-   Foco maior na escolha de conteúdos ou atividades isoladas, sem conexão explícita com o propósito da aprendizagem;
+-   Percepção limitada sobre o que se espera do desenvolvimento dos alunos ao término da disciplina;
+-   Planejamento centrado nas rotinas habituais do docente, e não naquilo que a disciplina pretende alcançar.
 
 A ausência desta conexão não significa falta de competência docente, mas sugere uma **desarticulação entre o que se pretende ensinar e o que efetivamente foi planejado**. Quando os objetivos não guiam as escolhas didáticas, há o risco de o ensino se tornar fragmentado e menos significativo para os alunos.
 

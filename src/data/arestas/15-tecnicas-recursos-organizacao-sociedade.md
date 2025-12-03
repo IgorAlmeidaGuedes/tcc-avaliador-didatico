@@ -4,12 +4,12 @@ Esta conexão expressa o quanto a escolha de métodos, técnicas e recursos de e
 
 Quando esta aresta aparece como **não preenchida**, isso indica que as técnicas e recursos utilizados podem **não estar adequadamente alinhados** às condições materiais e culturais da instituição ou às possibilidades reais dos estudantes. Isso costuma ocorrer em situações como:
 
--   falta de infraestrutura física ou tecnológica (salas inadequadas, equipamentos insuficientes, internet instável);
--   adoção de metodologias que exigem recursos que a instituição ou os alunos não possuem;
--   excesso de dependência de tecnologias que não funcionam de maneira confiável no ambiente de ensino;
--   barreiras institucionais que dificultam inovação, uso de equipamentos ou acesso a plataformas;
--   cultura organizacional pouco aberta à experimentação ou à adoção de novos recursos pedagógicos;
--   desigualdades de acesso entre os próprios estudantes, que limitam o uso de determinados recursos.
+-   Falta de infraestrutura física ou tecnológica (salas inadequadas, equipamentos insuficientes, internet instável);
+-   Adoção de metodologias que exigem recursos que a instituição ou os alunos não possuem;
+-   Excesso de dependência de tecnologias que não funcionam de maneira confiável no ambiente de ensino;
+-   Barreiras institucionais que dificultam inovação, uso de equipamentos ou acesso a plataformas;
+-   Cultura organizacional pouco aberta à experimentação ou à adoção de novos recursos pedagógicos;
+-   Desigualdades de acesso entre os próprios estudantes, que limitam o uso de determinados recursos.
 
 A ausência desta conexão não aponta falha do professor, mas evidencia que **o ambiente institucional e tecnológico pode estar interferindo no potencial das práticas pedagógicas**. Sem essa articulação, mesmo boas estratégias podem se tornar inviáveis, ineficazes ou excludentes.
 

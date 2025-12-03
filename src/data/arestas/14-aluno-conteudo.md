@@ -4,11 +4,11 @@ Esta conexão expressa como os alunos interagem com o conteúdo da disciplina, c
 
 Quando esta aresta aparece como **não preenchida**, isso indica que os alunos podem estar enfrentando dificuldades na **apropriação do conteúdo**, seja por falta de clareza, falta de conexão com seus conhecimentos prévios, desafios cognitivos ou ausência de estratégias adequadas de estudo. Isso tende a ocorrer em situações como:
 
--   dificuldade dos alunos em compreender conceitos fundamentais ou acompanhar a progressão do conteúdo;
--   baixa participação, dúvidas frequentes ou insegurança ao lidar com temas centrais da disciplina;
--   estratégias de estudo pouco eficazes ou ausência de orientação sobre como aprender o conteúdo;
--   falta de conexão entre o conteúdo apresentado e o repertório prévio dos estudantes;
--   dificuldade em aplicar o que aprenderam em situações novas, problemas ou exercícios práticos.
+-   Dificuldade dos alunos em compreender conceitos fundamentais ou acompanhar a progressão do conteúdo;
+-   Baixa participação, dúvidas frequentes ou insegurança ao lidar com temas centrais da disciplina;
+-   Estratégias de estudo pouco eficazes ou ausência de orientação sobre como aprender o conteúdo;
+-   Falta de conexão entre o conteúdo apresentado e o repertório prévio dos estudantes;
+-   Dificuldade em aplicar o que aprenderam em situações novas, problemas ou exercícios práticos.
 
 A ausência desta conexão não significa que os alunos não se esforçam, mas indica que **a relação deles com o conteúdo ainda não está sendo plenamente construída**, seja por fatores cognitivos, afetivos, metodológicos ou contextuais. Sem essa articulação, a aprendizagem tende a ser superficial, fragmentada ou temporária.
 
