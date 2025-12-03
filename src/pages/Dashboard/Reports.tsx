@@ -91,7 +91,7 @@ export default function Reports() {
                                             src={`data:image/svg+xml;utf8,${encodeURIComponent(
                                                 rep.arquivo
                                             )}`}
-                                            className="w-full h-full object-contain"
+                                            className="w-full h-full object-cover object-top"
                                             alt="preview"
                                         />
                                     ) : (
