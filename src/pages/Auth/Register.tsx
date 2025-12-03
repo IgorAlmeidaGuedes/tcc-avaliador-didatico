@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../../services/supabase';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,8 +15,6 @@ import {
 } from '@/components/ui/card';
 
 export default function Register() {
-    const navigate = useNavigate();
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -83,7 +81,6 @@ export default function Register() {
             setSuccessMessage(
                 'Conta criada com sucesso! Agora você pode fazer login.'
             );
-            setTimeout(() => navigate('/login'), 1200);
         } catch {
             setError('Erro desconhecido durante o cadastro.');
         } finally {
