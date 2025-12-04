@@ -152,19 +152,59 @@ VITE_SUPABASE_ANON_KEY=sua-key
 npm run dev
 ```
 
-## 🌐 Deploy (Vercel)
+## 🗄️ Configuração do Banco de Dados (Local)
 
-1. Suba o projeto para o GitHub
-2. Acesse https://vercel.com
-3. Importe o repositório
-4. Adicione as variáveis de ambiente:
+Este projeto inclui arquivos SQL para que qualquer pessoa possa criar e popular o banco localmente, sem depender do banco original do autor.
 
-```ini
-VITE_SUPABASE_URL
-VITE_SUPABASE_ANON_KEY
+### 📁 Arquivos utilizados
+
+Na pasta `database/` você encontrará:
+
+-   `schema.sql` — estrutura completa do banco
+-   `seed.sql` — dados iniciais necessários para funcionamento
+
+### 🧰 Pré-requisitos
+
+-   PostgreSQL instalado na máquina
+-   Um usuário com permissão para criar tabelas (ex.: `postgres`)
+
+### ▶️ Criando o banco local
+
+1. Crie um banco de dados vazio:
+
+```bash
+createdb avaliador_didatico
 ```
 
-5. Finalize o deploy automático 🎉
+2. Importe a estrutura:
+
+```bash
+psql -d avaliador_didatico -f database/schema.sql
+```
+
+3. Importe os dados iniciais:
+
+```bash
+psql -d avaliador_didatico -f database/seed.sql
+```
+
+⚠️ Importante:
+Este projeto utiliza Supabase Auth.  
+Se você optar por usar apenas PostgreSQL local sem Supabase, será necessário:
+
+-   remover ou adaptar as funções de autenticação;
+-   reimplementar login e registro manualmente;
+-   ajustar as consultas que acessam auth.users.
+
+O uso do Supabase (local ou na nuvem) é o caminho recomendado.
+
+```ini
+VITE_SUPABASE_URL=http://localhost:54321
+VITE_SUPABASE_ANON_KEY=<sua_chave_local>
+```
+
+Caso esteja usando Supabase local (com Docker), use os valores gerados automaticamente.
+Caso esteja usando PostgreSQL puro, você precisará ajustar o código manualmente para autenticação direta.
 
 ## 📊 Fundamentação Teórica (Resumo)
 
@@ -184,5 +224,5 @@ Esse modelo foi utilizado como referência conceitual para guiar o desenvolvimen
 
 ## 📬 Contato
 
-**Ígor Almeida Guedes**  
+**Ígor Almeida Guedes**
 📧 **guedes.igor018@gmail.com**
