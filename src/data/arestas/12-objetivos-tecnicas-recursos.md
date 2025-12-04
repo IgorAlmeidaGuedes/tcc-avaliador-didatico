@@ -1,6 +1,6 @@
 # Objetivos – Técnicas e Recursos
 
-Esta conexão expressa o quanto as técnicas, metodologias e recursos utilizados pelo professor estão alinhados aos objetivos de aprendizagem da disciplina. Ela representa se as estratégias adotadas realmente sustentam aquilo que se espera desenvolver nos alunos — seja compreensão conceitual, aplicação prática, análise crítica, resolução de problemas ou outras competências previstas nos objetivos.
+Esta conexão expressa o quanto as técnicas, metodologias e recursos utilizados pelo professor estão alinhados aos objetivos de aprendizagem da disciplina. Ela representa se as estratégias adotadas realmente sustentam aquilo que se espera desenvolver nos alunos, seja compreensão conceitual, aplicação prática, análise crítica, resolução de problemas ou outras competências previstas nos objetivos.
 
 Quando esta aresta aparece como **não preenchida**, isso indica que as metodologias escolhidas podem **não estar contribuindo de forma direta ou suficiente para alcançar os objetivos da disciplina**. Isso costuma ocorrer em situações como:
 

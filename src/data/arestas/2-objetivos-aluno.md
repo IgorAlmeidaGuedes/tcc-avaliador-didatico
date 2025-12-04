@@ -1,6 +1,6 @@
 # Objetivos – Aluno
 
-Esta conexão expressa o quanto os objetivos da disciplina dialogam com as características, necessidades e experiências reais dos alunos. Ela representa se aquilo que a disciplina pretende desenvolver faz sentido para quem aprende — considerando seu nível de conhecimento, seus interesses, dificuldades, motivações e seu contexto social, cultural e acadêmico.
+Esta conexão expressa o quanto os objetivos da disciplina dialogam com as características, necessidades e experiências reais dos alunos. Ela representa se aquilo que a disciplina pretende desenvolver faz sentido para quem aprende, considerando seu nível de conhecimento, seus interesses, dificuldades, motivações e seu contexto social, cultural e acadêmico.
 
 Quando esta aresta aparece como **não preenchida**, isso indica que os objetivos da disciplina podem **não estar alinhados ao perfil dos estudantes**, gerando distanciamento entre o que se espera que eles aprendam e o que eles efetivamente conseguem compreender, valorizar ou realizar. Isso tende a ocorrer em situações como:
 

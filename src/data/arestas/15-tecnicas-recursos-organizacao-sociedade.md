@@ -1,6 +1,6 @@
 # Técnicas e Recursos – Organização/Sociedade
 
-Esta conexão expressa o quanto a escolha de métodos, técnicas e recursos de ensino está condicionada ao contexto institucional e tecnológico em que o professor atua. Ela representa como fatores externos — como infraestrutura, acesso a tecnologias, políticas institucionais, cultura organizacional e suporte técnico — influenciam e, em muitos casos, limitam ou potencializam as possibilidades pedagógicas.
+Esta conexão expressa o quanto a escolha de métodos, técnicas e recursos de ensino está condicionada ao contexto institucional e tecnológico em que o professor atua. Ela representa como fatores externos, como infraestrutura, acesso a tecnologias, políticas institucionais, cultura organizacional e suporte técnico, influenciam e, em muitos casos, limitam ou potencializam as possibilidades pedagógicas.
 
 Quando esta aresta aparece como **não preenchida**, isso indica que as técnicas e recursos utilizados podem **não estar adequadamente alinhados** às condições materiais e culturais da instituição ou às possibilidades reais dos estudantes. Isso costuma ocorrer em situações como:
 

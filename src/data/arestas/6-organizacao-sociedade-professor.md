@@ -1,6 +1,6 @@
 # Organização/Sociedade – Professor
 
-Esta conexão expressa o quanto o trabalho do professor é influenciado, apoiado ou tensionado pelo contexto institucional, social, cultural e organizacional no qual ele atua. Ela representa se as condições externas — como políticas educacionais, cultura da instituição, infraestrutura, demandas sociais e expectativas da comunidade — dialogam com a prática docente e permitem que o professor desenvolva seu trabalho de forma coerente e efetiva.
+Esta conexão expressa o quanto o trabalho do professor é influenciado, apoiado ou tensionado pelo contexto institucional, social, cultural e organizacional no qual ele atua. Ela representa se as condições externas, como políticas educacionais, cultura da instituição, infraestrutura, demandas sociais e expectativas da comunidade, dialogam com a prática docente e permitem que o professor desenvolva seu trabalho de forma coerente e efetiva.
 
 Quando esta aresta aparece como **não preenchida**, isso indica que o professor pode estar enfrentando **desconexões entre seu planejamento/ação pedagógica e o contexto em que está inserido**. Em geral, isso ocorre em situações como:
 

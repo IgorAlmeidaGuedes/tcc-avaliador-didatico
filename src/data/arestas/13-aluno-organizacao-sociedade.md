@@ -10,7 +10,7 @@ Quando esta aresta aparece como **não preenchida**, isso indica que a prática 
 -   Pouca sensibilidade às desigualdades que influenciam o tempo, os recursos ou a capacidade de estudo dos alunos;
 -   Ausência de práticas que valorizem a diversidade cultural e as experiências externas como fonte legítima de aprendizagem.
 
-A ausência desta conexão não significa falta de sensibilidade docente, mas aponta que **a vida real dos alunos pode não estar suficientemente integrada ao processo de ensino**. Quando o contexto externo não é considerado, o estudante tende a encontrar mais barreiras — emocionais, cognitivas ou práticas — para se engajar e aprender.
+A ausência desta conexão não significa falta de sensibilidade docente, mas aponta que **a vida real dos alunos pode não estar suficientemente integrada ao processo de ensino**. Quando o contexto externo não é considerado, o estudante tende a encontrar mais barreiras, emocionais, cognitivas ou práticas, para se engajar e aprender.
 
 ## Como refletir sobre isso na prática
 

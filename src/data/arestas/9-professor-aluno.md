@@ -20,4 +20,4 @@ A ausência desta conexão não significa falta de cuidado do professor, mas pod
 -   “Eu consigo perceber e acompanhar as dificuldades individuais e coletivas dos alunos?”
 -   “Tenho informações suficientes sobre quem são meus alunos, seus interesses e suas necessidades?”
 
-Fortalecer esta conexão significa reconhecer que aprender é também **um processo relacional** — e que a qualidade da interação entre professor e aluno tem impacto direto no engajamento, na motivação e na construção do conhecimento.
+Fortalecer esta conexão significa reconhecer que aprender é também **um processo relacional**, e que a qualidade da interação entre professor e aluno tem impacto direto no engajamento, na motivação e na construção do conhecimento.

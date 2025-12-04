@@ -2,7 +2,7 @@
 
 Esta conexão expressa o quanto o professor domina, compreende e transforma o conteúdo da disciplina em uma forma adequada para o ensino. Ela representa a capacidade docente de selecionar, organizar, sequenciar e reinterpretar o conhecimento, tornando-o acessível e significativo para os alunos. Envolve também a articulação entre saberes acadêmicos, saberes da experiência e saberes pedagógicos.
 
-Quando esta aresta aparece como **não preenchida**, isso indica que pode haver dificuldades na **transposição didática** — isto é, no processo de transformar o conteúdo científico ou técnico em algo ensinável e compreensível para os estudantes. Isso costuma ocorrer em situações como:
+Quando esta aresta aparece como **não preenchida**, isso indica que pode haver dificuldades na **transposição didática**, isto é, no processo de transformar o conteúdo científico ou técnico em algo ensinável e compreensível para os estudantes. Isso costuma ocorrer em situações como:
 
 -   Domínio limitado ou insegurança em relação a partes do conteúdo;
 -   Dificuldade em explicar conceitos de diferentes maneiras ou em diferentes níveis de complexidade;

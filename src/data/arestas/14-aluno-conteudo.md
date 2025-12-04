@@ -1,6 +1,6 @@
 # Aluno – Conteúdo
 
-Esta conexão expressa como os alunos interagem com o conteúdo da disciplina, compreendem os conceitos, constroem significado e desenvolvem estratégias próprias para aprender. Ela representa a relação ativa do estudante com o conhecimento — incluindo sua capacidade de interpretar, questionar, aplicar, organizar mentalmente e integrar o conteúdo ao seu repertório pessoal.
+Esta conexão expressa como os alunos interagem com o conteúdo da disciplina, compreendem os conceitos, constroem significado e desenvolvem estratégias próprias para aprender. Ela representa a relação ativa do estudante com o conhecimento, incluindo sua capacidade de interpretar, questionar, aplicar, organizar mentalmente e integrar o conteúdo ao seu repertório pessoal.
 
 Quando esta aresta aparece como **não preenchida**, isso indica que os alunos podem estar enfrentando dificuldades na **apropriação do conteúdo**, seja por falta de clareza, falta de conexão com seus conhecimentos prévios, desafios cognitivos ou ausência de estratégias adequadas de estudo. Isso tende a ocorrer em situações como:
 
