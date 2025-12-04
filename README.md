@@ -2,6 +2,8 @@
 
 Sistema Web de Autoavaliação Docente baseado no **Hexágono Didático da Computação**
 
+### 🌐 Acesse o sistema: https://tcc-avaliador-didatico.vercel.app
+
 ### 👨‍💻 Autor: Ígor Almeida Guedes
 
 ### 🎓 Curso: Sistemas de Informação
@@ -88,37 +90,38 @@ Desenvolver uma aplicação web que permita diagnosticar a prática pedagógica 
 ```
 src/
 ├─ app/
-│ ├─ App.tsx
-│ └─ routes.tsx
+│   ├─ App.tsx
+│   └─ routes.tsx
 │
 ├─ components/
-│ ├─ AppSidebar.tsx
-│ ├─ Hexagon.tsx
-│ ├─ Layout.tsx
-│ ├─ NavLink.tsx
-│ ├─ PrivateRoute.tsx
-│ ├─ Sidebar.tsx
-│ ├─ theme-provider.tsx
-│ └─ ThemeToggle.tsx
+│   ├─ AppSidebar.tsx
+│   ├─ Hexagon.tsx
+│   ├─ Layout.tsx
+│   ├─ NavLink.tsx
+│   ├─ PrivateRoute.tsx
+│   ├─ Sidebar.tsx
+│   ├─ theme-provider.tsx
+│   └─ ThemeToggle.tsx
 │
 ├─ pages/
-├─────Auth/
-│    ├─ Login.tsx
-│    └─ Register.tsx
-├─────Dashboard/
-│    ├─ Form.tsx
-│    ├─ Home.tsx
-│    ├─ Information.tsx
-│    ├─ Questionnaire.tsx
-│    ├─ ReportDetails.tsx
-│    └─ Reports.tsx
+│   ├─ Auth/
+│   │   ├─ Login.tsx
+│   │   └─ Register.tsx
+│   │
+│   ├─ Dashboard/
+│   │   ├─ Form.tsx
+│   │   ├─ Home.tsx
+│   │   ├─ Information.tsx
+│   │   ├─ Questionnaire.tsx
+│   │   ├─ ReportDetails.tsx
+│   │   └─ Reports.tsx
 │
-├─ /styles
-│ ├─ form.css
-│ └─ globals.css
+├─ styles/
+│   ├─ form.css
+│   └─ globals.css
 │
 ├─ services/
-│ └─ supabase.ts
+│   └─ supabase.ts
 ```
 
 ## 🚀 Como executar localmente
