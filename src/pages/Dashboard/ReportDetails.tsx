@@ -127,7 +127,7 @@ export default function ReportDetails() {
 
                 <CardContent>
                     {/* CONTAINER DO SVG */}
-                    <div className="flex justify-center items-center bg-muted rounded-lg p-8 overflow-auto">
+                    <div className="flex justify-center items-start rounded-lg overflow-auto">
                         <div
                             className="w-full max-w-4xl"
                             dangerouslySetInnerHTML={{ __html: report.arquivo }}
