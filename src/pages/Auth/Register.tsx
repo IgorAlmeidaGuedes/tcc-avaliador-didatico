@@ -79,7 +79,7 @@ export default function Register() {
             }
 
             setSuccessMessage(
-                'Conta criada com sucesso! Agora você pode fazer login.'
+                'Conta criada com sucesso! Confirme o cadastro no seu e-mail.'
             );
         } catch {
             setError('Erro desconhecido durante o cadastro.');

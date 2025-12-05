@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { FileText, ArrowRight } from 'lucide-react';
 import { NavLink } from '@/components/navigation/NavLink';
 
+import Hexagon from '@/assets/hexagon.svg?react';
+
 const Home = () => {
     const hexagonElements = [
         'Professor',
@@ -58,6 +60,10 @@ const Home = () => {
                         identifica como suas ações se relacionam com os
                         elementos do <strong>Hexágono da Didática</strong>:
                     </p>
+
+                    <div className="flex justify-center mt-6">
+                        <Hexagon className="w-[1000px] h-auto text-black dark:text-white" />
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                         {hexagonElements.map((element) => (
