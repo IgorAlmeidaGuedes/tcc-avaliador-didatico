@@ -31,7 +31,6 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
 
     const [currentType, setCurrentType] = useState<number | null>(null);
 
-    // 🔥 Agora rastreamos perguntas usadas por tipo
     const [usedQuestions, setUsedQuestions] = useState<
         Record<number, number[]>
     >({});
@@ -46,6 +45,9 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
     const [currentAnswer, setCurrentAnswer] = useState<number | null>(null);
     const [finished, setFinished] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+    const [typePoints, setTypePoints] = useState<Record<number, number>>({});
+    const totalPoints = Object.values(typePoints).reduce((a, b) => a + b, 0);
 
     useEffect(() => {
         async function loadData() {
@@ -88,7 +90,6 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
         loadData();
     }, []);
 
-    // Quando troca de tipo, sorteia a primeira pergunta
     useEffect(() => {
         if (!currentType) return;
 
@@ -97,13 +98,11 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentType]);
 
-    // Finalizar
     useEffect(() => {
         if (finished) onFinish(typeResult);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [finished]);
 
-    // 🔥 Função que escolhe pergunta aleatória e não repetida
     function pickRandomQuestion(tipoId: number): Question | null {
         const all = questions.filter((q) => q.tipo_id === tipoId);
         const already = usedQuestions[tipoId] || [];
@@ -140,32 +139,34 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
 
         setErrorMessage(null);
 
-        // SIM → tipo = true → próximo tipo
-        if (currentAnswer === optionYes?.id) {
-            setTypeResult((prev) => ({ ...prev, [currentType!]: true }));
+        if (currentAnswer === optionYes?.id || currentAnswer === optionNo?.id) {
+            setTypeResult((prev) => ({
+                ...prev,
+                [currentType!]: currentAnswer === optionYes?.id,
+            }));
+
+            setTypePoints((prev) => ({
+                ...prev,
+                [currentType!]: 3,
+            }));
+
             goToNextType();
             return;
         }
 
-        // NÃO → tipo = false → próximo tipo
-        if (currentAnswer === optionNo?.id) {
-            setTypeResult((prev) => ({ ...prev, [currentType!]: false }));
-            goToNextType();
-            return;
-        }
-
-        // PARCIALMENTE
         if (currentAnswer === optionPartial?.id) {
+            setTypePoints((prev) => ({
+                ...prev,
+                [currentType!]: Math.min((prev[currentType!] || 0) + 1, 3),
+            }));
+
             const nextQ = pickRandomQuestion(currentType!);
 
-            // 🔥 Se não existir outra pergunta → equivale a NÃO
             if (!nextQ) {
-                setTypeResult((prev) => ({ ...prev, [currentType!]: false }));
                 goToNextType();
                 return;
             }
 
-            // Continua no mesmo tipo com nova pergunta
             setCurrentQuestion(nextQ);
             setCurrentAnswer(null);
             return;
@@ -233,7 +234,14 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
+            <div className="w-full max-w-2xl h-2 bg-muted rounded overflow-hidden">
+                <div
+                    className="h-full bg-primary transition-all"
+                    style={{ width: `${(totalPoints / 45) * 100}%` }}
+                />
+            </div>
+
             <Card className="w-full max-w-2xl">
                 <CardHeader>
                     <CardTitle className="text-2xl text-center">
