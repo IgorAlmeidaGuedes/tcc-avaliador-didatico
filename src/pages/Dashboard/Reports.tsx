@@ -23,9 +23,19 @@ export default function Reports() {
             try {
                 setIsLoading(true);
 
+                const {
+                    data: { user },
+                } = await supabase.auth.getUser();
+
+                if (!user) {
+                    console.error('Usuário não autenticado');
+                    return;
+                }
+
                 const { data, error } = await supabase
                     .from('resultado')
                     .select('id, created_at, arquivo')
+                    .eq('usuario_id', user.id) // <── FILTRO CORRETO
                     .order('created_at', { ascending: false });
 
                 if (error) {
