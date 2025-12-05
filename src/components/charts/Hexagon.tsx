@@ -32,9 +32,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
         }
     }, [tiposNegativos]);
 
-    const BASE_HEIGHT = 360;
-    const PADDING_BOTTOM = 40;
-    const svgHeight = BASE_HEIGHT + contentHeight + PADDING_BOTTOM;
+    const svgHeight = 350 + contentHeight + 40;
 
     const radius = 100;
     const center = { x: 500, y: 175 };
@@ -95,13 +93,13 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                 style={{
                     position: 'absolute',
                     visibility: 'hidden',
-                    width: 900,
+                    width: '900px',
                     pointerEvents: 'none',
                     whiteSpace: 'normal',
                 }}
             >
                 {tiposNegativos.map((t) => (
-                    <div key={t.id} style={{ marginBottom: 30 }}>
+                    <div key={t.id}>
                         <div
                             dangerouslySetInnerHTML={{ __html: t.descricao }}
                             style={{ whiteSpace: 'normal' }}
@@ -175,7 +173,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                         x={20}
                         y={350}
                         width={900}
-                        height={contentHeight + 50}
+                        height={contentHeight + 10}
                     >
                         <div
                             style={{

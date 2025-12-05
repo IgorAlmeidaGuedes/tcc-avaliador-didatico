@@ -57,7 +57,7 @@ const Sobre = () => {
                         </a>
 
                         <a
-                            href="https://www.researchgate.net/publication/347555296_Didatica_da_Computacao_na_Perspectiva_da_Aprendizagem_Ativa"
+                            href="https://sol.sbc.org.br/index.php/cbie_estendido/article/view/13022"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-start gap-3 p-4 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 transition-colors group"
