@@ -82,7 +82,7 @@ const Home = () => {
                         <strong className="text-foreground">
                             visão clara e personalizada
                         </strong>{' '}
-                        de como sua prática se conecta a cada uma dessas áreas —
+                        de como sua prática se conecta a cada uma dessas áreas,
                         e onde existem oportunidades de ampliar ou fortalecer
                         sua abordagem pedagógica.
                     </p>
@@ -146,11 +146,11 @@ const Home = () => {
                     <p className="text-muted-foreground leading-relaxed">
                         O sistema{' '}
                         <strong className="text-foreground">
-                            não faz julgamentos
+                            não faz julgamentos,
                         </strong>{' '}
-                        — ele apenas mostra como suas respostas se relacionam
-                        com as categorias do Hexágono, permitindo que você
-                        visualize suas escolhas didáticas de um jeito novo.
+                        ele apenas mostra como suas respostas se relacionam com
+                        as categorias do Hexágono, permitindo que você visualize
+                        suas escolhas didáticas de um jeito novo.
                     </p>
                     <p className="text-lg font-semibold text-secondary">
                         Seu resultado é apenas para você.
@@ -169,7 +169,7 @@ const Home = () => {
                             lateral e inicie sua reflexão.
                         </p>
                         <p className="text-primary-foreground/90">
-                            Leva poucos minutos — e pode trazer insights
+                            Leva poucos minutos, e pode trazer insights
                             importantes sobre sua prática em sala de aula.
                         </p>
                     </div>
