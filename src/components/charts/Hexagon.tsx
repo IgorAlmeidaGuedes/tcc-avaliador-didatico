@@ -134,7 +134,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                             y1={points[from].y}
                             x2={points[to].x}
                             y2={points[to].y}
-                            stroke={result[type] ? 'green' : 'red'}
+                            stroke={result[type] ? '#0072B2' : '#D55E00'}
                             strokeWidth="2"
                             opacity={0.9}
                         />
