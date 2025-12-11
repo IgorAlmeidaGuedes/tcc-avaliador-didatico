@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 
@@ -9,6 +8,8 @@ import { supabase } from '../../services/supabase';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+import htmlToPdfmake from 'html-to-pdfmake';
 
 (pdfMake as any).vfs = (pdfFonts as any).vfs;
 
@@ -51,6 +52,7 @@ export default function Form() {
                 return;
             }
 
+            // SVG → PNG
             const svgString = new XMLSerializer().serializeToString(svg);
             const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
             const svgUrl = URL.createObjectURL(svgBlob);
@@ -60,9 +62,19 @@ export default function Form() {
 
             URL.revokeObjectURL(svgUrl);
 
+            // HTML real renderizado
             let rawHTML = reportRef.current?.innerHTML ?? '';
+
+            // Converte bullets
             rawHTML = convertBullets(rawHTML);
-            const contentBlocks = await htmlToPdfBlocks(rawHTML);
+
+            // 🚨 Usa html-to-pdfmake — INCRÍVEL E CONFIÁVEL
+            let contentBlocks = htmlToPdfmake(rawHTML);
+
+            // Se não for array, transforma em array
+            if (!Array.isArray(contentBlocks)) {
+                contentBlocks = [contentBlocks];
+            }
 
             const docDefinition: any = {
                 pageSize: 'A4',
@@ -197,6 +209,7 @@ export default function Form() {
         return canvas.toDataURL('image/png');
     }
 
+    // Converte bullets do Markdown para <ul><li>
     function convertBullets(html: string): string {
         return html.replace(/(?:<p[^>]*>\s*•\s*(.*?)<\/p>[\s]*)+/g, (match) => {
             const items = [...match.matchAll(/<p[^>]*>\s*•\s*(.*?)<\/p>/g)]
@@ -206,6 +219,7 @@ export default function Form() {
             return `<ul>${items}</ul>`;
         });
     }
+
     return (
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
             {errorMessage && (
@@ -225,6 +239,7 @@ export default function Form() {
                         }}
                     />
 
+                    {/* Conteúdo real que será convertido */}
                     <div
                         ref={reportRef}
                         style={{ display: 'none' }}
@@ -234,239 +249,4 @@ export default function Form() {
             )}
         </div>
     );
-}
-
-async function htmlToPdfBlocks(rawHTML: string): Promise<any[]> {
-    if (!rawHTML) return [];
-
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(rawHTML, 'text/html');
-
-    function extractInlineStyle(el: Element) {
-        const styleText = el.getAttribute('style') || '';
-        const style: any = {};
-
-        if (/font-weight:\s*(bold|700|600)/i.test(styleText)) style.bold = true;
-        if (/font-style:\s*italic/i.test(styleText)) style.italics = true;
-        if (/text-decoration:\s*underline/i.test(styleText))
-            style.decoration = 'underline';
-
-        const fsMatch = styleText.match(/font-size:\s*([0-9.]+)px/i);
-        if (fsMatch) style.fontSize = Number(fsMatch[1]);
-
-        return style;
-    }
-
-    function normalizeText(text: string) {
-        return text.replace(/\s+/g, ' ');
-    }
-
-    function inlineChunksFromNode(
-        node: ChildNode
-    ): Array<string | Record<string, any>> {
-        if (node.nodeType === Node.TEXT_NODE) {
-            const normalized = normalizeText(node.textContent ?? '');
-            return normalized ? [normalized] : [];
-        }
-
-        if (node.nodeType === Node.ELEMENT_NODE) {
-            const el = node as Element;
-            const tag = el.tagName.toLowerCase();
-            const childChunks = Array.from(el.childNodes).flatMap(
-                inlineChunksFromNode
-            );
-            const styled = extractInlineStyle(el);
-
-            const styledChunks = childChunks.map((chunk) =>
-                typeof chunk === 'string'
-                    ? { text: chunk, ...styled }
-                    : { ...chunk, ...styled }
-            );
-
-            switch (tag) {
-                case 'strong':
-                case 'b':
-                    return styledChunks.map((c) => ({ ...c, bold: true }));
-
-                case 'em':
-                case 'i':
-                    return styledChunks.map((c) => ({ ...c, italics: true }));
-
-                case 'u':
-                    return styledChunks.map((c) => ({
-                        ...c,
-                        decoration: 'underline',
-                    }));
-
-                case 'a':
-                    const href = el.getAttribute('href') || '';
-                    return styledChunks.map((c) => ({
-                        ...c,
-                        link: href,
-                        decoration: 'underline',
-                    }));
-
-                case 'br':
-                    return ['\n'];
-
-                default:
-                    return styledChunks;
-            }
-        }
-
-        return [];
-    }
-
-    function flattenChunks(chunks: Array<string | Record<string, any>>) {
-        const out: Array<string | Record<string, any>> = [];
-
-        for (const c of chunks) {
-            const last = out[out.length - 1];
-
-            if (typeof c === 'string') {
-                const cleaned = c.replace(/\s+/g, ' ');
-
-                if (typeof last === 'string') {
-                    out[out.length - 1] = (last + ' ' + cleaned).replace(
-                        /\s+/g,
-                        ' '
-                    );
-                } else if (
-                    last &&
-                    typeof last === 'object' &&
-                    typeof last.text === 'string'
-                ) {
-                    last.text = (last.text + ' ' + cleaned).replace(
-                        /\s+/g,
-                        ' '
-                    );
-                } else {
-                    out.push(cleaned);
-                }
-
-                continue;
-            }
-
-            if (typeof c === 'object' && c.text) {
-                if (typeof last === 'string') {
-                    out[out.length - 1] = {
-                        text: (last + ' ' + c.text).replace(/\s+/g, ' '),
-                        ...c,
-                    };
-                } else if (
-                    last &&
-                    typeof last === 'object' &&
-                    typeof last.text === 'string'
-                ) {
-                    last.text = (last.text + ' ' + c.text).replace(/\s+/g, ' ');
-                } else {
-                    out.push(c);
-                }
-
-                continue;
-            }
-
-            out.push(c);
-        }
-
-        return out;
-    }
-
-    function blockFromElement(el: Element): any | any[] | null {
-        const tag = el.tagName.toLowerCase();
-
-        if (/^h[1-6]$/.test(tag)) {
-            const level = Number(tag[1]);
-            const chunks = flattenChunks(
-                Array.from(el.childNodes).flatMap(inlineChunksFromNode)
-            );
-
-            return {
-                text: chunks,
-                bold: true,
-                fontSize: 20 - level * 2,
-                margin: [0, 10, 0, 6],
-            };
-        }
-
-        if (tag === 'p') {
-            const chunks = flattenChunks(
-                Array.from(el.childNodes).flatMap(inlineChunksFromNode)
-            );
-            if (!chunks.length) return null;
-
-            return {
-                text: chunks,
-                margin: [0, 4, 0, 10],
-            };
-        }
-
-        if (tag === 'div') {
-            const blocks: any[] = [];
-
-            for (const child of Array.from(el.childNodes)) {
-                if (child.nodeType === Node.ELEMENT_NODE) {
-                    const b = blockFromElement(child as Element);
-                    if (Array.isArray(b)) blocks.push(...b);
-                    else if (b) blocks.push(b);
-                } else if (child.nodeType === Node.TEXT_NODE) {
-                    const txt = normalizeText(child.textContent || '');
-                    if (txt) {
-                        blocks.push({
-                            text: txt,
-                            margin: [0, 4, 0, 10],
-                        });
-                    }
-                }
-            }
-
-            return blocks;
-        }
-
-        if (tag === 'ul' || tag === 'ol') {
-            const items = Array.from(el.querySelectorAll(':scope > li')).map(
-                (li) => {
-                    const liChunks = flattenChunks(
-                        Array.from(li.childNodes).flatMap(inlineChunksFromNode)
-                    );
-                    return liChunks.length === 1 &&
-                        typeof liChunks[0] === 'string'
-                        ? liChunks[0]
-                        : liChunks;
-                }
-            );
-
-            return tag === 'ul'
-                ? { ul: items, margin: [0, 2, 0, 4] }
-                : { ol: items, margin: [0, 2, 0, 4] };
-        }
-
-        const chunks = flattenChunks(
-            Array.from(el.childNodes).flatMap(inlineChunksFromNode)
-        );
-        if (!chunks.length) return null;
-
-        return { text: chunks, margin: [0, 4, 0, 10] };
-    }
-
-    const blocks: any[] = [];
-
-    for (const child of Array.from(doc.body.childNodes)) {
-        if (child.nodeType === Node.TEXT_NODE) {
-            const txt = normalizeText(child.textContent || '');
-            if (txt.trim()) blocks.push({ text: txt, margin: [0, 4, 0, 10] });
-            continue;
-        }
-
-        if (child.nodeType === Node.ELEMENT_NODE) {
-            const blockOrBlocks = blockFromElement(child as Element);
-            if (Array.isArray(blockOrBlocks)) {
-                blocks.push(...blockOrBlocks);
-            } else if (blockOrBlocks) {
-                blocks.push(blockOrBlocks);
-            }
-        }
-    }
-
-    return blocks;
 }

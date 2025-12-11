@@ -10,6 +10,7 @@ interface Report {
     id: number;
     created_at: string;
     arquivo: string;
+    thumbnail?: string;
 }
 
 export default function Reports() {
@@ -34,7 +35,7 @@ export default function Reports() {
 
                 const { data, error } = await supabase
                     .from('resultado')
-                    .select('id, created_at, arquivo')
+                    .select('id, created_at, arquivo, thumbnail')
                     .eq('usuario_id', user.id)
                     .order('created_at', { ascending: false });
 
@@ -112,14 +113,20 @@ export default function Reports() {
                                             />
                                         )}
 
-                                        {isPDF && (
+                                        {isPDF && rep.thumbnail ? (
+                                            <img
+                                                src={rep.thumbnail}
+                                                alt="preview PDF"
+                                                className="w-full h-full object-cover object-top"
+                                            />
+                                        ) : isPDF ? (
                                             <div className="flex flex-col items-center text-muted-foreground">
                                                 <FileText className="w-16 h-16 mb-2" />
                                                 <span className="text-sm">
-                                                    PDF gerado
+                                                    PDF
                                                 </span>
                                             </div>
-                                        )}
+                                        ) : null}
 
                                         {!isSVG && !isPDF && (
                                             <FileText className="w-16 h-16 text-muted-foreground" />
