@@ -53,7 +53,6 @@ export default function Form() {
                 return;
             }
 
-            // SVG → PNG
             const svgString = new XMLSerializer().serializeToString(svg);
             const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
             const svgUrl = URL.createObjectURL(svgBlob);
@@ -67,7 +66,6 @@ export default function Form() {
             rawHTML = normalizeBullets(rawHTML);
             const contentBlocks = await htmlToPdfBlocks(rawHTML);
 
-            // pdfMake document
             const docDefinition: any = {
                 pageSize: 'A4',
                 pageMargins: [30, 40, 30, 40],
@@ -109,7 +107,6 @@ export default function Form() {
                 pdfFinal.getBlob(resolve);
             });
 
-            // Supabase user
             const {
                 data: { user },
             } = await supabase.auth.getUser();
@@ -122,7 +119,6 @@ export default function Form() {
             const fileName = `relatorio_${user.id}_${Date.now()}.pdf`;
             const thumbName = `thumb_${fileName}.png`;
 
-            // Upload thumbnail
             const { error: thumbError } = await supabase.storage
                 .from('relatorios')
                 .upload(thumbName, dataURLtoBlob(thumbBase64));
@@ -134,7 +130,6 @@ export default function Form() {
                 return;
             }
 
-            // Upload PDF
             const { error: uploadError } = await supabase.storage
                 .from('relatorios')
                 .upload(fileName, pdfBlob);
@@ -148,7 +143,6 @@ export default function Form() {
                 return;
             }
 
-            // Get public URLs
             const { data: pdfUrlData } = supabase.storage
                 .from('relatorios')
                 .getPublicUrl(fileName);
@@ -157,7 +151,6 @@ export default function Form() {
                 .from('relatorios')
                 .getPublicUrl(thumbName);
 
-            // Save in database
             await supabase.from('resultado').insert([
                 {
                     usuario_id: user.id,
@@ -175,7 +168,6 @@ export default function Form() {
     }
 
     function normalizeBullets(html: string) {
-        // pega todos os <p> que começam com "•"
         const bulletRegex = /<p[^>]*>\s*•\s*(.*?)<\/p>/g;
 
         const items = [];
@@ -185,20 +177,16 @@ export default function Form() {
             items.push(match[1]);
         }
 
-        // se não achar bullets, retorna o original
         if (items.length === 0) return html;
 
-        // remove todos os <p> com bullet do HTML original
         let cleaned = html.replace(bulletRegex, '');
 
-        // monta UL com os itens coletados
         const ul = `
         <ul>
             ${items.map((i) => `<li>${i}</li>`).join('')}
         </ul>
     `;
 
-        // insere UL logo antes da próxima section ou no final
         cleaned = cleaned.replace('</div>', `${ul}</div>`);
 
         return cleaned;
@@ -258,7 +246,6 @@ export default function Form() {
                     <div
                         ref={reportRef}
                         style={{ display: 'none' }}
-                        // também colocamos o HTML diretamente para garantir leitura
                         dangerouslySetInnerHTML={{ __html: reportHtml }}
                     />
                 </>
@@ -436,7 +423,6 @@ async function htmlToPdfBlocks(rawHTML: string): Promise<any[]> {
         return { text: chunks, margin: [0, 4, 0, 10] };
     }
 
-    // -------- PARSER ROOT --------
     const blocks: any[] = [];
 
     for (const child of Array.from(doc.body.childNodes)) {

@@ -52,7 +52,6 @@ export default function ReportDetails() {
         const isSVG = report.arquivo.trim().startsWith('<svg');
         const isPDF = report.arquivo.toLowerCase().endsWith('.pdf');
 
-        // DOWNLOAD PDF
         if (isPDF) {
             const a = document.createElement('a');
             a.href = report.arquivo;
@@ -61,7 +60,6 @@ export default function ReportDetails() {
             return;
         }
 
-        // DOWNLOAD SVG
         if (isSVG) {
             const blob = new Blob([report.arquivo], { type: 'image/svg+xml' });
             const url = URL.createObjectURL(blob);
@@ -108,7 +106,6 @@ export default function ReportDetails() {
 
     return (
         <div className="max-w-5xl mx-auto">
-            {/* TOPO */}
             <div className="mb-6 flex items-center justify-between">
                 <Button
                     variant="outline"
@@ -124,7 +121,6 @@ export default function ReportDetails() {
                 </Button>
             </div>
 
-            {/* CARD PRINCIPAL */}
             <Card>
                 <CardHeader>
                     <CardTitle className="text-2xl">Relatório #{id}</CardTitle>
@@ -141,7 +137,6 @@ export default function ReportDetails() {
 
                 <CardContent>
                     <div className="flex justify-center items-start rounded-lg overflow-auto">
-                        {/* VISUALIZAÇÃO PDF */}
                         {isPDF && (
                             <iframe
                                 src={report.arquivo}
@@ -150,7 +145,6 @@ export default function ReportDetails() {
                             />
                         )}
 
-                        {/* VISUALIZAÇÃO SVG */}
                         {isSVG && (
                             <div
                                 className="w-full max-w-4xl"

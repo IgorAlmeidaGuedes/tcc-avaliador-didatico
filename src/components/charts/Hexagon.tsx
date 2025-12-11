@@ -100,7 +100,6 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                 borderRadius: '8px',
             }}
         >
-            {/* BLOCO INVISÍVEL PARA MEDIR ALTURA DO TEXTO */}
             <div
                 ref={measureRef}
                 style={{
@@ -126,7 +125,6 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                 ))}
             </div>
 
-            {/* SVG DO GRÁFICO */}
             <div
                 style={{
                     display: 'flex',
@@ -186,7 +184,6 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                 </svg>
             </div>
 
-            {/* TEXTOS NEGATIVOS FAZEM PARTE DA "PÁGINA BRANCA" */}
             <div
                 style={{
                     marginTop: 30,

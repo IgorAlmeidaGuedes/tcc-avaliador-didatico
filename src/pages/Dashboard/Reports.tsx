@@ -102,7 +102,6 @@ export default function Reports() {
                             >
                                 <CardContent className="p-6">
                                     <div className="aspect-square bg-muted rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                                        {/* PREVIEW SVG */}
                                         {isSVG && (
                                             <img
                                                 src={`data:image/svg+xml;utf8,${encodeURIComponent(
@@ -113,7 +112,6 @@ export default function Reports() {
                                             />
                                         )}
 
-                                        {/* PREVIEW PDF */}
                                         {isPDF && (
                                             <div className="flex flex-col items-center text-muted-foreground">
                                                 <FileText className="w-16 h-16 mb-2" />
@@ -123,7 +121,6 @@ export default function Reports() {
                                             </div>
                                         )}
 
-                                        {/* CASO NÃO SEJA NEM PDF NEM SVG */}
                                         {!isSVG && !isPDF && (
                                             <FileText className="w-16 h-16 text-muted-foreground" />
                                         )}
