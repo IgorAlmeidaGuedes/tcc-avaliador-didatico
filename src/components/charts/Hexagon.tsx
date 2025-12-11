@@ -11,7 +11,7 @@ interface HexagonChartProps {
 interface TipoDescricao {
     id: number;
     nome: string;
-    descricao: string; // HTML vindo do markdown
+    descricao: string;
 }
 
 const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {

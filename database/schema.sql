@@ -50,7 +50,8 @@ create table if not exists public.resultado (
   usuario_id uuid not null,
   questionario_id bigint not null,
   created_at timestamptz default now(),
-  arquivo jsonb
+  arquivo text not null,
+  thumbnail text
 );
 
 -- =========================================

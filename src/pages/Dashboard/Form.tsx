@@ -6,9 +6,11 @@ import Questionnaire from './Questionnaire';
 import Hexagon from '../../components/charts/Hexagon';
 import { supabase } from '../../services/supabase';
 
+import * as pdfjsLib from 'pdfjs-dist';
+pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.js';
+
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-
 import htmlToPdfmake from 'html-to-pdfmake';
 
 (pdfMake as any).vfs = (pdfFonts as any).vfs;
@@ -62,11 +64,9 @@ export default function Form() {
             URL.revokeObjectURL(svgUrl);
 
             let rawHTML = reportRef.current?.innerHTML ?? '';
-
             rawHTML = convertBullets(rawHTML);
 
             let contentBlocks = htmlToPdfmake(rawHTML);
-
             if (!Array.isArray(contentBlocks)) {
                 contentBlocks = [contentBlocks];
             }
@@ -102,20 +102,32 @@ export default function Form() {
                 },
             };
 
-            const pdfThumb = pdfMake.createPdf(docDefinition);
-            const thumbBase64: string = await new Promise((resolve) => {
-                pdfThumb.getDataUrl(resolve);
-            });
-
             const pdfFinal = pdfMake.createPdf(docDefinition);
             const pdfBlob: Blob = await new Promise((resolve) => {
                 pdfFinal.getBlob(resolve);
             });
 
+            const arrayBuffer = await pdfBlob.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer })
+                .promise;
+            const page = await pdf.getPage(1);
+            const viewport = page.getViewport({ scale: 1 });
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d')!;
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            await page.render({
+                canvasContext: ctx,
+                viewport,
+            }).promise;
+
+            const thumbnailBase64 = canvas.toDataURL('image/png');
+
             const {
                 data: { user },
             } = await supabase.auth.getUser();
-
             if (!user) {
                 setErrorMessage('Usuário não autenticado.');
                 return;
@@ -126,7 +138,7 @@ export default function Form() {
 
             const { error: thumbError } = await supabase.storage
                 .from('relatorios')
-                .upload(thumbName, dataURLtoBlob(thumbBase64));
+                .upload(thumbName, dataURLtoBlob(thumbnailBase64));
 
             if (thumbError) {
                 setErrorMessage(
@@ -141,9 +153,7 @@ export default function Form() {
 
             if (uploadError) {
                 setErrorMessage(
-                    `Erro ao armazenar PDF: ${
-                        uploadError.message || uploadError
-                    }`
+                    `Erro ao armazenar PDF: ${uploadError.message}`
                 );
                 return;
             }
@@ -209,7 +219,6 @@ export default function Form() {
             const items = [...match.matchAll(/<p[^>]*>\s*•\s*(.*?)<\/p>/g)]
                 .map((m) => `<li>${m[1]}</li>`)
                 .join('');
-
             return `<ul>${items}</ul>`;
         });
     }
