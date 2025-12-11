@@ -78,7 +78,6 @@ export default function AppRoutes() {
     return (
         <Router>
             <Routes>
-                {/* ROTA RAIZ */}
                 <Route
                     path="/"
                     element={
@@ -90,13 +89,11 @@ export default function AppRoutes() {
                     }
                 />
 
-                {/* ROTAS PÚBLICAS */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
 
-                {/* ROTAS PRIVADAS COM LAYOUT */}
                 <Route
                     path="/dashboard"
                     element={

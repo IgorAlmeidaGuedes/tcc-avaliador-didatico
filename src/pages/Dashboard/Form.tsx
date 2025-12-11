@@ -52,7 +52,6 @@ export default function Form() {
                 return;
             }
 
-            // SVG → PNG
             const svgString = new XMLSerializer().serializeToString(svg);
             const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
             const svgUrl = URL.createObjectURL(svgBlob);
@@ -62,16 +61,12 @@ export default function Form() {
 
             URL.revokeObjectURL(svgUrl);
 
-            // HTML real renderizado
             let rawHTML = reportRef.current?.innerHTML ?? '';
 
-            // Converte bullets
             rawHTML = convertBullets(rawHTML);
 
-            // 🚨 Usa html-to-pdfmake — INCRÍVEL E CONFIÁVEL
             let contentBlocks = htmlToPdfmake(rawHTML);
 
-            // Se não for array, transforma em array
             if (!Array.isArray(contentBlocks)) {
                 contentBlocks = [contentBlocks];
             }
@@ -209,7 +204,6 @@ export default function Form() {
         return canvas.toDataURL('image/png');
     }
 
-    // Converte bullets do Markdown para <ul><li>
     function convertBullets(html: string): string {
         return html.replace(/(?:<p[^>]*>\s*•\s*(.*?)<\/p>[\s]*)+/g, (match) => {
             const items = [...match.matchAll(/<p[^>]*>\s*•\s*(.*?)<\/p>/g)]
@@ -239,7 +233,6 @@ export default function Form() {
                         }}
                     />
 
-                    {/* Conteúdo real que será convertido */}
                     <div
                         ref={reportRef}
                         style={{ display: 'none' }}

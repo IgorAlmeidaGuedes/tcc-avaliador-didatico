@@ -4,7 +4,6 @@ import { FileText, ExternalLink, Lightbulb, Heart } from 'lucide-react';
 const Sobre = () => {
     return (
         <div className="max-w-5xl mx-auto space-y-8">
-            {/* Header */}
             <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                     Sobre o Projeto
@@ -20,7 +19,6 @@ const Sobre = () => {
                 </p>
             </div>
 
-            {/* Informações do Projeto */}
             <Card className="border-primary/20 shadow-lg">
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
@@ -75,7 +73,6 @@ const Sobre = () => {
                 </CardContent>
             </Card>
 
-            {/* Inspiração da Tese */}
             <Card className="border-primary/20 shadow-lg">
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
@@ -169,7 +166,6 @@ const Sobre = () => {
                 </CardContent>
             </Card>
 
-            {/* Motivação Pessoal */}
             <Card className="border-primary/20 shadow-lg">
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">

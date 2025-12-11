@@ -17,57 +17,41 @@ import a13 from './13-aluno-organizacao-sociedade.md?raw';
 import a14 from './14-aluno-conteudo.md?raw';
 import a15 from './15-tecnicas-recursos-organizacao-sociedade.md?raw';
 
-// ----------------------------
-// Markdown-it instance
-// ----------------------------
 const md = new MarkdownIt({
     html: true,
     breaks: true,
     linkify: true,
 });
 
-// ----------------------------
-// APPLY INLINE SVG-SAFE STYLES
-// ----------------------------
 function injectStyles(html: string): string {
-    return (
-        html
-            .replace(
-                /<h1>/g,
-                `<h1 style="font-size:22px; margin-bottom:12px; font-weight:bold;">`
-            )
-            .replace(
-                /<h2>/g,
-                `<h2 style="font-size:18px; margin-top:20px; margin-bottom:10px; font-weight:bold;">`
-            )
-            .replace(/<p>/g, `<p style="margin:10px 0; line-height:1.6;">`)
-            .replace(/<strong>/g, `<strong style="font-weight:bold;">`)
+    return html
+        .replace(
+            /<h1>/g,
+            `<h1 style="font-size:22px; margin-bottom:12px; font-weight:bold;">`
+        )
+        .replace(
+            /<h2>/g,
+            `<h2 style="font-size:18px; margin-top:20px; margin-bottom:10px; font-weight:bold;">`
+        )
+        .replace(/<p>/g, `<p style="margin:10px 0; line-height:1.6;">`)
+        .replace(/<strong>/g, `<strong style="font-weight:bold;">`)
 
-            // REMOVE A TAG <ul> inteira
-            .replace(/<ul>/g, '')
-            .replace(/<\/ul>/g, '')
+        .replace(/<ul>/g, '')
+        .replace(/<\/ul>/g, '')
 
-            // LISTAS → transformar <li> em parágrafos com bullet
-            .replace(
-                /<li>/g,
-                `<p style="margin:6px 0 6px 20px; line-height:1.6;">• `
-            )
-            .replace(/<\/li>/g, `</p>`)
-    );
+        .replace(
+            /<li>/g,
+            `<p style="margin:6px 0 6px 20px; line-height:1.6;">• `
+        )
+        .replace(/<\/li>/g, `</p>`);
 }
 
-// ----------------------------
-// Markdown to sanitized HTML
-// ----------------------------
 function parse(markdown: string): string {
     const rawHtml = md.render(markdown);
     const styledHtml = injectStyles(rawHtml);
     return DOMPurify.sanitize(styledHtml);
 }
 
-// ----------------------------
-// Arestas export
-// ----------------------------
 export interface ArestaDescricao {
     id: number;
     nome: string;

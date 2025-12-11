@@ -21,10 +21,8 @@ export function Layout({ children, userName }: LayoutProps) {
     flex items-center justify-between
 "
                     >
-                        {/* Botão abre/fecha sidebar */}
                         <SidebarTrigger />
 
-                        {/* Botão de trocar tema sempre visível */}
                         <ThemeToggle />
                     </div>
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { supabase } from '../../services/supabase';
 
@@ -95,12 +96,10 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
 
         const next = pickRandomQuestion(currentType);
         setCurrentQuestion(next);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentType]);
 
     useEffect(() => {
         if (finished) onFinish(typeResult);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [finished]);
 
     function pickRandomQuestion(tipoId: number): Question | null {
@@ -180,7 +179,6 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
 
         const index = types.indexOf(currentType!);
 
-        // Tem próximo tipo?
         if (index < types.length - 1) {
             const nextType = types[index + 1];
             setCurrentType(nextType);
@@ -188,7 +186,6 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
             return;
         }
 
-        // Não tem → terminou
         setFinished(true);
     }
 

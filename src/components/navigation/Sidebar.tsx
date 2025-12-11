@@ -48,12 +48,10 @@ export default function Topbar({ userName }: TopbarProps) {
                 boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
             }}
         >
-            {/* Nome do App */}
             <h2 style={{ fontSize: '1.1rem', margin: 0 }}>
                 Avaliador Didático
             </h2>
 
-            {/* Links */}
             <nav
                 style={{
                     display: 'flex',
@@ -96,7 +94,6 @@ export default function Topbar({ userName }: TopbarProps) {
                 </NavLink>
             </nav>
 
-            {/* Usuário + Botão Tema + Logout */}
             <div
                 style={{
                     display: 'flex',

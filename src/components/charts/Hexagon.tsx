@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from 'react';
 import { ARESTAS } from '../../data/arestas';
 
@@ -36,7 +37,6 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                     .join(''),
             });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tiposNegativos]);
 
     const radius = 100;
