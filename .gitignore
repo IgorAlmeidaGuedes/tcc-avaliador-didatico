@@ -41,9 +41,6 @@ node_modules/.vite/
 # Vite temp build cache (algumas versões usam)
 vite.config.ts.timestamp-* 
 
-# PDF.js Workers gerados manualmente
-public/pdf.worker.js
-public/pdf.worker.min.js
 
 # Build tools cache
 node_modules/.cache/
