@@ -28,7 +28,7 @@ export function Layout({ children, userName }: LayoutProps) {
                         <ThemeToggle />
                     </div>
 
-                    <div className="p-6 md:p-8 lg:p-12">{children}</div>
+                    <div className="p-2 md:p-8 lg:p-12">{children}</div>
                 </main>
             </div>
         </SidebarProvider>

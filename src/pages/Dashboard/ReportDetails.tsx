@@ -49,17 +49,30 @@ export default function ReportDetails() {
     const handleDownload = () => {
         if (!report?.arquivo) return;
 
-        const blob = new Blob([report.arquivo], { type: 'image/svg+xml' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        const isSVG = report.arquivo.trim().startsWith('<svg');
+        const isPDF = report.arquivo.toLowerCase().endsWith('.pdf');
 
-        a.href = url;
-        a.download = `relatorio-${id}.svg`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        // DOWNLOAD PDF
+        if (isPDF) {
+            const a = document.createElement('a');
+            a.href = report.arquivo;
+            a.download = `relatorio-${id}.pdf`;
+            a.click();
+            return;
+        }
 
-        URL.revokeObjectURL(url);
+        // DOWNLOAD SVG
+        if (isSVG) {
+            const blob = new Blob([report.arquivo], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `relatorio-${id}.svg`;
+            a.click();
+
+            URL.revokeObjectURL(url);
+        }
     };
 
     if (isLoading) {
@@ -90,6 +103,9 @@ export default function ReportDetails() {
         );
     }
 
+    const isSVG = report.arquivo.trim().startsWith('<svg');
+    const isPDF = report.arquivo.toLowerCase().endsWith('.pdf');
+
     return (
         <div className="max-w-5xl mx-auto">
             {/* TOPO */}
@@ -104,7 +120,7 @@ export default function ReportDetails() {
 
                 <Button onClick={handleDownload}>
                     <Download className="mr-2 h-4 w-4" />
-                    Baixar arquivo (SVG)
+                    Baixar arquivo
                 </Button>
             </div>
 
@@ -118,20 +134,31 @@ export default function ReportDetails() {
                         {format(
                             new Date(report.created_at),
                             "dd 'de' MMMM 'de' yyyy 'às' HH:mm",
-                            {
-                                locale: ptBR,
-                            }
+                            { locale: ptBR }
                         )}
                     </p>
                 </CardHeader>
 
                 <CardContent>
-                    {/* CONTAINER DO SVG */}
                     <div className="flex justify-center items-start rounded-lg overflow-auto">
-                        <div
-                            className="w-full max-w-4xl"
-                            dangerouslySetInnerHTML={{ __html: report.arquivo }}
-                        />
+                        {/* VISUALIZAÇÃO PDF */}
+                        {isPDF && (
+                            <iframe
+                                src={report.arquivo}
+                                className="w-full max-w-4xl h-[90vh] rounded-lg"
+                                style={{ border: 'none' }}
+                            />
+                        )}
+
+                        {/* VISUALIZAÇÃO SVG */}
+                        {isSVG && (
+                            <div
+                                className="w-full max-w-4xl"
+                                dangerouslySetInnerHTML={{
+                                    __html: report.arquivo,
+                                }}
+                            />
+                        )}
                     </div>
                 </CardContent>
             </Card>

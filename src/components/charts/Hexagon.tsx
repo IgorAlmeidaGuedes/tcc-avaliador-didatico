@@ -4,7 +4,7 @@ import { ARESTAS } from '../../data/arestas';
 interface HexagonChartProps {
     result: Record<number, boolean>;
     svgRef?: React.RefObject<SVGSVGElement>;
-    onReady?: () => void;
+    onReady?: (data: { html: string }) => void;
 }
 
 interface TipoDescricao {
@@ -17,11 +17,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
     const [tipos] = useState<TipoDescricao[]>(ARESTAS);
 
     const measureRef = useRef<HTMLDivElement>(null);
-    const [contentHeight, setContentHeight] = useState(0);
-
-    useEffect(() => {
-        onReady?.();
-    }, [onReady]);
+    const [, setContentHeight] = useState(0);
 
     const tiposNegativos = tipos.filter((t) => result[t.id] === false);
 
@@ -32,7 +28,16 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
         }
     }, [tiposNegativos]);
 
-    const svgHeight = 350 + contentHeight + 40;
+    useEffect(() => {
+        if (onReady) {
+            onReady({
+                html: tiposNegativos
+                    .map((t) => `<div class="section">${t.descricao}</div>`)
+                    .join(''),
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [tiposNegativos]);
 
     const radius = 100;
     const center = { x: 500, y: 175 };
@@ -86,15 +91,28 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
     ];
 
     return (
-        <>
-            {/* INVISIBLE MEASUREMENT BLOCK */}
+        <div
+            style={{
+                background: 'white',
+                padding: '20px',
+                maxWidth: '900px',
+                margin: '0 auto',
+                borderRadius: '8px',
+            }}
+        >
+            {/* BLOCO INVISÍVEL PARA MEDIR ALTURA DO TEXTO */}
             <div
                 ref={measureRef}
                 style={{
                     position: 'absolute',
                     visibility: 'hidden',
-                    width: '900px',
                     pointerEvents: 'none',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    width: 'calc(100vw - 40px)',
+                    maxWidth: '900px',
+                    margin: '0 auto',
                     whiteSpace: 'normal',
                 }}
             >
@@ -108,25 +126,24 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                 ))}
             </div>
 
-            {/* SVG */}
+            {/* SVG DO GRÁFICO */}
             <div
                 style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    marginTop: '40px',
+                    marginTop: window.innerWidth < 600 ? '10px' : '40px',
                     width: '100%',
                 }}
             >
                 <svg
                     ref={svgRef}
                     width="100%"
-                    height={svgHeight}
-                    viewBox={`0 0 960 ${svgHeight}`}
+                    height={350}
+                    viewBox="0 0 900 350"
                     preserveAspectRatio="xMidYMid meet"
                 >
                     <rect width="100%" height="100%" fill="white" />
 
-                    {/* Linhas */}
                     {edges.map(({ from, to, type }) => (
                         <line
                             key={type}
@@ -140,7 +157,6 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                         />
                     ))}
 
-                    {/* Pontos e textos */}
                     {points.map((p, i) => (
                         <g key={i}>
                             <circle cx={p.x} cy={p.y} r="6" fill="#333" />
@@ -167,40 +183,28 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                             </text>
                         </g>
                     ))}
-
-                    {/* TEXTOS NEGATIVOS */}
-                    <foreignObject
-                        x={20}
-                        y={350}
-                        width={900}
-                        height={contentHeight + 10}
-                    >
-                        <div
-                            style={{
-                                fontSize: '14px',
-                                lineHeight: '1.6',
-                                fontFamily: 'Arial, sans-serif',
-                                color: '#000',
-                                textAlign: 'left',
-                                whiteSpace: 'normal',
-                                padding: '10px 5px',
-                            }}
-                        >
-                            {tiposNegativos.map((t) => (
-                                <div key={t.id} style={{ marginBottom: 30 }}>
-                                    <div
-                                        dangerouslySetInnerHTML={{
-                                            __html: t.descricao,
-                                        }}
-                                        style={{ whiteSpace: 'normal' }}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </foreignObject>
                 </svg>
             </div>
-        </>
+
+            {/* TEXTOS NEGATIVOS FAZEM PARTE DA "PÁGINA BRANCA" */}
+            <div
+                style={{
+                    marginTop: 30,
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    color: '#000',
+                    textAlign: 'left',
+                }}
+            >
+                {tiposNegativos.map((t) => (
+                    <div
+                        key={t.id}
+                        style={{ marginBottom: 30 }}
+                        dangerouslySetInnerHTML={{ __html: t.descricao }}
+                    />
+                ))}
+            </div>
+        </div>
     );
 };
 

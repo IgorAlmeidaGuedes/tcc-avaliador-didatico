@@ -194,7 +194,7 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
 
     if (isLoading) {
         return (
-            <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="flex items-center justify-center py-6">
                 <div className="flex flex-col items-center gap-4">
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
                     <p className="text-muted-foreground">
@@ -215,7 +215,7 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
 
     if (finished) {
         return (
-            <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="flex items-center justify-center py-6">
                 <Card className="max-w-md">
                     <CardContent className="pt-6">
                         <div className="flex flex-col items-center gap-4 text-center">
@@ -234,7 +234,7 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
+        <div className="flex flex-col items-center justify-center py-6 gap-6">
             <div className="w-full max-w-2xl h-2 bg-muted rounded overflow-hidden">
                 <div
                     className="h-full bg-primary transition-all"
@@ -257,7 +257,11 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
                     )}
 
                     <RadioGroup
-                        value={currentAnswer?.toString()}
+                        value={
+                            currentAnswer !== null
+                                ? currentAnswer.toString()
+                                : ''
+                        }
                         onValueChange={(value) =>
                             setCurrentAnswer(Number(value))
                         }

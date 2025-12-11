@@ -35,7 +35,7 @@ export default function Reports() {
                 const { data, error } = await supabase
                     .from('resultado')
                     .select('id, created_at, arquivo')
-                    .eq('usuario_id', user.id) // <── FILTRO CORRETO
+                    .eq('usuario_id', user.id)
                     .order('created_at', { ascending: false });
 
                 if (error) {
@@ -86,47 +86,66 @@ export default function Reports() {
                 </Card>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {reports.map((rep) => (
-                        <Card
-                            key={rep.id}
-                            className="cursor-pointer hover:shadow-lg transition-shadow"
-                            onClick={() =>
-                                navigate(`/dashboard/reports/${rep.id}`)
-                            }
-                        >
-                            <CardContent className="p-6">
-                                <div className="aspect-square bg-muted rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                                    {rep.arquivo ? (
-                                        <img
-                                            src={`data:image/svg+xml;utf8,${encodeURIComponent(
-                                                rep.arquivo
-                                            )}`}
-                                            className="w-full h-full object-cover object-top"
-                                            alt="preview"
-                                        />
-                                    ) : (
-                                        <FileText className="w-16 h-16 text-muted-foreground" />
-                                    )}
-                                </div>
+                    {reports.map((rep) => {
+                        const isSVG = rep.arquivo.trim().startsWith('<svg');
+                        const isPDF = rep.arquivo
+                            .toLowerCase()
+                            .endsWith('.pdf');
 
-                                <div className="space-y-1">
-                                    <p className="font-semibold text-lg">
-                                        Relatório #{rep.id}
-                                    </p>
-
-                                    <p className="text-sm text-muted-foreground">
-                                        {format(
-                                            new Date(rep.created_at),
-                                            "dd 'de' MMMM 'de' yyyy",
-                                            {
-                                                locale: ptBR,
-                                            }
+                        return (
+                            <Card
+                                key={rep.id}
+                                className="cursor-pointer hover:shadow-lg transition-shadow"
+                                onClick={() =>
+                                    navigate(`/dashboard/reports/${rep.id}`)
+                                }
+                            >
+                                <CardContent className="p-6">
+                                    <div className="aspect-square bg-muted rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                                        {/* PREVIEW SVG */}
+                                        {isSVG && (
+                                            <img
+                                                src={`data:image/svg+xml;utf8,${encodeURIComponent(
+                                                    rep.arquivo
+                                                )}`}
+                                                className="w-full h-full object-cover object-top"
+                                                alt="preview"
+                                            />
                                         )}
-                                    </p>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    ))}
+
+                                        {/* PREVIEW PDF */}
+                                        {isPDF && (
+                                            <div className="flex flex-col items-center text-muted-foreground">
+                                                <FileText className="w-16 h-16 mb-2" />
+                                                <span className="text-sm">
+                                                    PDF gerado
+                                                </span>
+                                            </div>
+                                        )}
+
+                                        {/* CASO NÃO SEJA NEM PDF NEM SVG */}
+                                        {!isSVG && !isPDF && (
+                                            <FileText className="w-16 h-16 text-muted-foreground" />
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <p className="font-semibold text-lg">
+                                            Relatório #{rep.id}
+                                        </p>
+
+                                        <p className="text-sm text-muted-foreground">
+                                            {format(
+                                                new Date(rep.created_at),
+                                                "dd 'de' MMMM 'de' yyyy",
+                                                { locale: ptBR }
+                                            )}
+                                        </p>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        );
+                    })}
                 </div>
             )}
         </div>
