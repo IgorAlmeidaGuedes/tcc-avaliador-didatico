@@ -2,13 +2,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-// src/pages/Form.tsx
 import { useEffect, useRef, useState } from 'react';
 import Questionnaire from './Questionnaire';
 import Hexagon from '../../components/charts/Hexagon';
 import { supabase } from '../../services/supabase';
 
-// pdfMake imports (TypeScript-friendly)v av  av v v
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
@@ -63,7 +61,7 @@ export default function Form() {
             URL.revokeObjectURL(svgUrl);
 
             let rawHTML = reportRef.current?.innerHTML ?? '';
-            rawHTML = normalizeBullets(rawHTML);
+            rawHTML = convertBullets(rawHTML);
             const contentBlocks = await htmlToPdfBlocks(rawHTML);
 
             const docDefinition: any = {
@@ -167,31 +165,6 @@ export default function Form() {
         }
     }
 
-    function normalizeBullets(html: string) {
-        const bulletRegex = /<p[^>]*>\s*•\s*(.*?)<\/p>/g;
-
-        const items = [];
-        let match;
-
-        while ((match = bulletRegex.exec(html)) !== null) {
-            items.push(match[1]);
-        }
-
-        if (items.length === 0) return html;
-
-        let cleaned = html.replace(bulletRegex, '');
-
-        const ul = `
-        <ul>
-            ${items.map((i) => `<li>${i}</li>`).join('')}
-        </ul>
-    `;
-
-        cleaned = cleaned.replace('</div>', `${ul}</div>`);
-
-        return cleaned;
-    }
-
     function dataURLtoBlob(dataUrl: string): Blob {
         const arr = dataUrl.split(',');
         const mimeMatch = arr[0].match(/:(.*?);/);
@@ -224,6 +197,15 @@ export default function Form() {
         return canvas.toDataURL('image/png');
     }
 
+    function convertBullets(html: string): string {
+        return html.replace(/(?:<p[^>]*>\s*•\s*(.*?)<\/p>[\s]*)+/g, (match) => {
+            const items = [...match.matchAll(/<p[^>]*>\s*•\s*(.*?)<\/p>/g)]
+                .map((m) => `<li>${m[1]}</li>`)
+                .join('');
+
+            return `<ul>${items}</ul>`;
+        });
+    }
     return (
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
             {errorMessage && (
@@ -276,7 +258,7 @@ async function htmlToPdfBlocks(rawHTML: string): Promise<any[]> {
     }
 
     function normalizeText(text: string) {
-        return text.replace(/\s+/g, ' ').trimStart();
+        return text.replace(/\s+/g, ' ');
     }
 
     function inlineChunksFromNode(
@@ -339,24 +321,58 @@ async function htmlToPdfBlocks(rawHTML: string): Promise<any[]> {
         const out: Array<string | Record<string, any>> = [];
 
         for (const c of chunks) {
+            const last = out[out.length - 1];
+
             if (typeof c === 'string') {
-                const trimmed = c.trimEnd();
-                const last = out[out.length - 1];
+                const cleaned = c.replace(/\s+/g, ' ');
 
                 if (typeof last === 'string') {
-                    out[out.length - 1] = last + ' ' + trimmed;
+                    out[out.length - 1] = (last + ' ' + cleaned).replace(
+                        /\s+/g,
+                        ' '
+                    );
+                } else if (
+                    last &&
+                    typeof last === 'object' &&
+                    typeof last.text === 'string'
+                ) {
+                    last.text = (last.text + ' ' + cleaned).replace(
+                        /\s+/g,
+                        ' '
+                    );
                 } else {
-                    out.push(trimmed);
+                    out.push(cleaned);
                 }
-            } else {
-                out.push(c);
+
+                continue;
             }
+
+            if (typeof c === 'object' && c.text) {
+                if (typeof last === 'string') {
+                    out[out.length - 1] = {
+                        text: (last + ' ' + c.text).replace(/\s+/g, ' '),
+                        ...c,
+                    };
+                } else if (
+                    last &&
+                    typeof last === 'object' &&
+                    typeof last.text === 'string'
+                ) {
+                    last.text = (last.text + ' ' + c.text).replace(/\s+/g, ' ');
+                } else {
+                    out.push(c);
+                }
+
+                continue;
+            }
+
+            out.push(c);
         }
 
         return out;
     }
 
-    function blockFromElement(el: Element): any | null {
+    function blockFromElement(el: Element): any | any[] | null {
         const tag = el.tagName.toLowerCase();
 
         if (/^h[1-6]$/.test(tag)) {
@@ -386,15 +402,25 @@ async function htmlToPdfBlocks(rawHTML: string): Promise<any[]> {
         }
 
         if (tag === 'div') {
-            const chunks = flattenChunks(
-                Array.from(el.childNodes).flatMap(inlineChunksFromNode)
-            );
-            if (!chunks.length) return null;
+            const blocks: any[] = [];
 
-            return {
-                text: chunks,
-                margin: [0, 4, 0, 10],
-            };
+            for (const child of Array.from(el.childNodes)) {
+                if (child.nodeType === Node.ELEMENT_NODE) {
+                    const b = blockFromElement(child as Element);
+                    if (Array.isArray(b)) blocks.push(...b);
+                    else if (b) blocks.push(b);
+                } else if (child.nodeType === Node.TEXT_NODE) {
+                    const txt = normalizeText(child.textContent || '');
+                    if (txt) {
+                        blocks.push({
+                            text: txt,
+                            margin: [0, 4, 0, 10],
+                        });
+                    }
+                }
+            }
+
+            return blocks;
         }
 
         if (tag === 'ul' || tag === 'ol') {
@@ -411,8 +437,8 @@ async function htmlToPdfBlocks(rawHTML: string): Promise<any[]> {
             );
 
             return tag === 'ul'
-                ? { ul: items, margin: [0, 6, 0, 10] }
-                : { ol: items, margin: [0, 6, 0, 10] };
+                ? { ul: items, margin: [0, 2, 0, 4] }
+                : { ol: items, margin: [0, 2, 0, 4] };
         }
 
         const chunks = flattenChunks(
@@ -433,8 +459,12 @@ async function htmlToPdfBlocks(rawHTML: string): Promise<any[]> {
         }
 
         if (child.nodeType === Node.ELEMENT_NODE) {
-            const block = blockFromElement(child as Element);
-            if (block) blocks.push(block);
+            const blockOrBlocks = blockFromElement(child as Element);
+            if (Array.isArray(blockOrBlocks)) {
+                blocks.push(...blockOrBlocks);
+            } else if (blockOrBlocks) {
+                blocks.push(blockOrBlocks);
+            }
         }
     }
 
