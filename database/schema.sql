@@ -71,3 +71,39 @@ create table if not exists public.usuarios (
   criado_em timestamp default now(),
   auth_user_id uuid
 );
+
+-- =========================================
+-- CONFIGURAÇÕES DO SUPABASE (STORAGE E RLS)
+-- =========================================
+
+-- 1. Criação do Bucket de Storage para os PDFs
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('relatorios', 'relatorios', true);
+
+-- Políticas de Segurança do Storage
+CREATE POLICY "Leitura pública dos relatórios" ON storage.objects FOR SELECT USING (bucket_id = 'relatorios');
+CREATE POLICY "Upload autenticado de relatórios" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'relatorios');
+
+-- 2. Ativação da Segurança em Nível de Linha (RLS) nas tabelas
+ALTER TABLE public.usuarios ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.resultado ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.perguntas ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.opcoes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.questionarios ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.tipos_pergunta ENABLE ROW LEVEL SECURITY;
+
+-- 3. Políticas da Tabela: usuarios
+CREATE POLICY "anon insert usuarios" ON public.usuarios FOR INSERT WITH CHECK (true);
+CREATE POLICY "auth insert usuarios" ON public.usuarios FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Usuários podem ler seus próprios dados" ON public.usuarios FOR SELECT USING (auth.uid() = auth_user_id);
+CREATE POLICY "Usuários podem atualizar seus próprios dados" ON public.usuarios FOR UPDATE USING (auth.uid() = auth_user_id);
+
+-- 4. Políticas da Tabela: resultado
+CREATE POLICY "Usuários podem ver seus próprios relatórios" ON public.resultado FOR SELECT USING (auth.uid() = usuario_id);
+CREATE POLICY "Usuários podem inserir seus próprios relatórios" ON public.resultado FOR INSERT WITH CHECK (auth.uid() = usuario_id);
+
+-- 5. Políticas das Tabelas Estruturais (Leitura Pública para o Questionário funcionar)
+CREATE POLICY "Leitura pública de perguntas" ON public.perguntas FOR SELECT USING (true);
+CREATE POLICY "Leitura pública de opções" ON public.opcoes FOR SELECT USING (true);
+CREATE POLICY "Leitura pública de questionarios" ON public.questionarios FOR SELECT USING (true);
+CREATE POLICY "Leitura pública de tipos" ON public.tipos_pergunta FOR SELECT USING (true);

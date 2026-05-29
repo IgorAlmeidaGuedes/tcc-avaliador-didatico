@@ -12,7 +12,7 @@ const Home = () => {
         'Conteúdo',
         'Objetivos',
         'Técnicas e Recursos',
-        'Organização/Sociedade',
+        'Organização/Sociedade'
     ];
 
     return (

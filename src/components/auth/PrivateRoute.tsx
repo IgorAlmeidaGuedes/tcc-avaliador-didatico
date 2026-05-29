@@ -8,7 +8,7 @@ interface PrivateRouteProps {
 
 export default function PrivateRoute({
     isUserLogged,
-    children,
+    children
 }: PrivateRouteProps) {
     if (!isUserLogged) {
         return <Navigate to="/login" replace />;

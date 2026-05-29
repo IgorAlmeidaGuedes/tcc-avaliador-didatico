@@ -11,7 +11,7 @@ import {
     CardDescription,
     CardFooter,
     CardHeader,
-    CardTitle,
+    CardTitle
 } from '@/components/ui/card';
 
 export default function ForgotPassword() {
@@ -29,7 +29,7 @@ export default function ForgotPassword() {
 
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
             redirectTo:
-                'https://tcc-avaliador-didatico.vercel.app/reset-password',
+                'https://tcc-avaliador-didatico.vercel.app/reset-password'
         });
 
         if (error) {

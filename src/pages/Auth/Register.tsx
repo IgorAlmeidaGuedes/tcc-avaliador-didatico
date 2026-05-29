@@ -11,7 +11,7 @@ import {
     CardDescription,
     CardFooter,
     CardHeader,
-    CardTitle,
+    CardTitle
 } from '@/components/ui/card';
 
 export default function Register() {
@@ -38,7 +38,7 @@ export default function Register() {
         try {
             const { data, error: signUpError } = await supabase.auth.signUp({
                 email,
-                password,
+                password
             });
 
             if (signUpError) {
@@ -64,8 +64,8 @@ export default function Register() {
                     {
                         nome: name,
                         email,
-                        auth_user_id: data.user.id,
-                    },
+                        auth_user_id: data.user.id
+                    }
                 ]);
 
             if (insertError) {

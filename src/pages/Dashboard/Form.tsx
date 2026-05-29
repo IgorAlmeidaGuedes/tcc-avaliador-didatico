@@ -79,27 +79,27 @@ export default function Form() {
                         image: hexagonBase64,
                         width: 420,
                         alignment: 'center',
-                        margin: [0, 0, 0, 12],
+                        margin: [0, 0, 0, 12]
                     },
                     {
                         text: 'Relatório do Diagnóstico',
                         style: 'title',
-                        margin: [0, 0, 0, 12],
+                        margin: [0, 0, 0, 12]
                     },
-                    ...contentBlocks,
+                    ...contentBlocks
                 ],
                 styles: {
                     title: {
                         fontSize: 18,
                         bold: true,
                         margin: [0, 15, 0, 10],
-                        color: '#000',
-                    },
+                        color: '#000'
+                    }
                 },
                 defaultStyle: {
                     fontSize: 11,
-                    lineHeight: 1.2,
-                },
+                    lineHeight: 1.2
+                }
             };
 
             const pdfFinal = pdfMake.createPdf(docDefinition);
@@ -120,13 +120,13 @@ export default function Form() {
 
             await page.render({
                 canvasContext: ctx,
-                viewport,
+                viewport
             }).promise;
 
             const thumbnailBase64 = canvas.toDataURL('image/png');
 
             const {
-                data: { user },
+                data: { user }
             } = await supabase.auth.getUser();
             if (!user) {
                 setErrorMessage('Usuário não autenticado.');
@@ -171,8 +171,8 @@ export default function Form() {
                     usuario_id: user.id,
                     questionario_id: 1,
                     arquivo: pdfUrlData.publicUrl,
-                    thumbnail: thumbUrlData.publicUrl,
-                },
+                    thumbnail: thumbUrlData.publicUrl
+                }
             ]);
 
             setErrorMessage(null);

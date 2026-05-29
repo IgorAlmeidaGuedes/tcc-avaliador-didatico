@@ -8,7 +8,7 @@ import {
     SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem,
+    SidebarMenuItem
 } from '@/components/ui/sidebar';
 import { NavLink } from '@/components/navigation/NavLink';
 import { supabase } from '@/services/supabase';
@@ -36,7 +36,7 @@ export function AppSidebar({ userName }: AppSidebarProps) {
         { title: 'Página Inicial', url: '/dashboard', icon: Home },
         { title: 'Formulário', url: '/dashboard/form', icon: FileText },
         { title: 'Relatórios', url: '/dashboard/reports', icon: BarChart3 },
-        { title: 'Sobre', url: '/dashboard/Information', icon: Info },
+        { title: 'Sobre', url: '/dashboard/Information', icon: Info }
     ];
 
     return (

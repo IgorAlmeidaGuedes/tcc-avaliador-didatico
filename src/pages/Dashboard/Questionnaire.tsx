@@ -114,7 +114,7 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
 
         setUsedQuestions((prev) => ({
             ...prev,
-            [tipoId]: [...(prev[tipoId] || []), random.id],
+            [tipoId]: [...(prev[tipoId] || []), random.id]
         }));
 
         return random;
@@ -141,12 +141,12 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
         if (currentAnswer === optionYes?.id || currentAnswer === optionNo?.id) {
             setTypeResult((prev) => ({
                 ...prev,
-                [currentType!]: currentAnswer === optionYes?.id,
+                [currentType!]: currentAnswer === optionYes?.id
             }));
 
             setTypePoints((prev) => ({
                 ...prev,
-                [currentType!]: 3,
+                [currentType!]: 3
             }));
 
             goToNextType();
@@ -156,7 +156,7 @@ export default function Questionnaire({ onFinish }: QuestionnaireProps) {
         if (currentAnswer === optionPartial?.id) {
             setTypePoints((prev) => ({
                 ...prev,
-                [currentType!]: Math.min((prev[currentType!] || 0) + 1, 3),
+                [currentType!]: Math.min((prev[currentType!] || 0) + 1, 3)
             }));
 
             const nextQ = pickRandomQuestion(currentType!);

@@ -12,7 +12,7 @@ import {
     CardDescription,
     CardFooter,
     CardHeader,
-    CardTitle,
+    CardTitle
 } from '@/components/ui/card';
 
 export default function Login() {
@@ -29,7 +29,7 @@ export default function Login() {
         try {
             const { data, error } = await supabase.auth.signInWithPassword({
                 email,
-                password,
+                password
             });
 
             if (error) {

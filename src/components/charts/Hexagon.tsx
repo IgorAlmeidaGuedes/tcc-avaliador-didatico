@@ -34,7 +34,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
             onReady({
                 html: tiposNegativos
                     .map((t) => `<div class="section">${t.descricao}</div>`)
-                    .join(''),
+                    .join('')
             });
         }
     }, [tiposNegativos]);
@@ -48,7 +48,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
         'Aluno',
         'Técnicas e Recursos',
         'Conteúdo',
-        ['Organização/', 'Sociedade'],
+        ['Organização/', 'Sociedade']
     ];
 
     const labelOffsets = [
@@ -57,14 +57,14 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
         { dx: 30, dy: 20 },
         { dx: 0, dy: 35 },
         { dx: -40, dy: 20 },
-        { dx: -40, dy: -10 },
+        { dx: -40, dy: -10 }
     ];
 
     const points = Array.from({ length: 6 }).map((_, i) => {
         const angle = (Math.PI / 3) * i - Math.PI / 2;
         return {
             x: center.x + radius * Math.cos(angle),
-            y: center.y + radius * Math.sin(angle),
+            y: center.y + radius * Math.sin(angle)
         };
     });
 
@@ -87,7 +87,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
         { from: 2, to: 5, type: 13 }, // Aluno - Organização/Sociedade
         { from: 2, to: 4, type: 14 }, // Aluno - Conteúdo
 
-        { from: 3, to: 5, type: 15 }, // Técnicas e Recursos - Organização/Sociedade
+        { from: 3, to: 5, type: 15 } // Técnicas e Recursos - Organização/Sociedade
     ];
 
     return (
@@ -97,7 +97,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                 padding: '20px',
                 maxWidth: '900px',
                 margin: '0 auto',
-                borderRadius: '8px',
+                borderRadius: '8px'
             }}
         >
             <div
@@ -112,7 +112,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                     width: 'calc(100vw - 40px)',
                     maxWidth: '900px',
                     margin: '0 auto',
-                    whiteSpace: 'normal',
+                    whiteSpace: 'normal'
                 }}
             >
                 {tiposNegativos.map((t) => (
@@ -130,7 +130,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                     display: 'flex',
                     justifyContent: 'center',
                     marginTop: window.innerWidth < 600 ? '10px' : '40px',
-                    width: '100%',
+                    width: '100%'
                 }}
             >
                 <svg
@@ -190,7 +190,7 @@ const Hexagon: React.FC<HexagonChartProps> = ({ result, svgRef, onReady }) => {
                     fontSize: 14,
                     lineHeight: 1.6,
                     color: '#000',
-                    textAlign: 'left',
+                    textAlign: 'left'
                 }}
             >
                 {tiposNegativos.map((t) => (

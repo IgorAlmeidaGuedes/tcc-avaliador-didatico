@@ -149,7 +149,7 @@ export default function ReportDetails() {
                             <div
                                 className="w-full max-w-4xl"
                                 dangerouslySetInnerHTML={{
-                                    __html: report.arquivo,
+                                    __html: report.arquivo
                                 }}
                             />
                         )}

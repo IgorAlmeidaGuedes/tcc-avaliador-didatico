@@ -25,7 +25,7 @@ export default function Reports() {
                 setIsLoading(true);
 
                 const {
-                    data: { user },
+                    data: { user }
                 } = await supabase.auth.getUser();
 
                 if (!user) {

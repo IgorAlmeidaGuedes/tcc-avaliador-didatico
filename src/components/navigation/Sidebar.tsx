@@ -45,7 +45,7 @@ export default function Topbar({ userName }: TopbarProps) {
                 top: 0,
                 left: 0,
                 zIndex: 50,
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
             }}
         >
             <h2 style={{ fontSize: '1.1rem', margin: 0 }}>
@@ -56,7 +56,7 @@ export default function Topbar({ userName }: TopbarProps) {
                 style={{
                     display: 'flex',
                     gap: '20px',
-                    alignItems: 'center',
+                    alignItems: 'center'
                 }}
             >
                 <NavLink
@@ -65,7 +65,7 @@ export default function Topbar({ userName }: TopbarProps) {
                     style={({ isActive }) => ({
                         color: isActive ? '#00a8ff' : 'white',
                         textDecoration: 'none',
-                        fontWeight: isActive ? 'bold' : 'normal',
+                        fontWeight: isActive ? 'bold' : 'normal'
                     })}
                 >
                     Página Inicial
@@ -76,7 +76,7 @@ export default function Topbar({ userName }: TopbarProps) {
                     style={({ isActive }) => ({
                         color: isActive ? '#00a8ff' : 'white',
                         textDecoration: 'none',
-                        fontWeight: isActive ? 'bold' : 'normal',
+                        fontWeight: isActive ? 'bold' : 'normal'
                     })}
                 >
                     Formulário
@@ -87,7 +87,7 @@ export default function Topbar({ userName }: TopbarProps) {
                     style={({ isActive }) => ({
                         color: isActive ? '#00a8ff' : 'white',
                         textDecoration: 'none',
-                        fontWeight: isActive ? 'bold' : 'normal',
+                        fontWeight: isActive ? 'bold' : 'normal'
                     })}
                 >
                     Relatórios
@@ -98,7 +98,7 @@ export default function Topbar({ userName }: TopbarProps) {
                 style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '15px',
+                    gap: '15px'
                 }}
             >
                 <ThemeToggle />
@@ -117,7 +117,7 @@ export default function Topbar({ userName }: TopbarProps) {
                         borderRadius: '5px',
                         color: 'white',
                         cursor: 'pointer',
-                        fontSize: '0.85rem',
+                        fontSize: '0.85rem'
                     }}
                 >
                     {isLoading ? 'Saindo...' : 'Sair'}
