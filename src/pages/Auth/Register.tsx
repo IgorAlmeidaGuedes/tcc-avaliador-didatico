@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../../services/supabase';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,6 +22,7 @@ export default function Register() {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -78,9 +79,21 @@ export default function Register() {
                 return;
             }
 
-            setSuccessMessage(
-                'Conta criada com sucesso! Confirme o cadastro no seu e-mail.'
-            );
+            const { error: loginError } =
+                await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+            if (loginError) {
+                setSuccessMessage(
+                    'Conta criada com sucesso! Faça login para continuar.'
+                );
+                return;
+            }
+
+            navigate('/');
+            return;
         } catch {
             setError('Erro desconhecido durante o cadastro.');
         } finally {

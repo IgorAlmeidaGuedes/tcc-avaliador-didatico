@@ -3,7 +3,7 @@ import {
     Routes,
     Route,
     Navigate,
-    Outlet,
+    Outlet
 } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
@@ -49,6 +49,7 @@ export default function AppRoutes() {
             }
 
             const userId = data.session.user.id;
+            console.log('SESSION USER ID:', userId);
 
             const { data: user, error: userError } = await supabase
                 .from('usuarios')
@@ -56,15 +57,26 @@ export default function AppRoutes() {
                 .eq('auth_user_id', userId)
                 .single();
 
+            console.log('USER QUERY:', user);
+            console.log('USER ERROR:', userError);
             if (userError) console.error('❌ Erro na query:', userError);
 
             setIsUserLogged(true);
             setUserName(user?.nome ?? null);
-
             setIsLoading(false);
         };
 
         loadUser();
+
+        const {
+            data: { subscription }
+        } = supabase.auth.onAuthStateChange(() => {
+            loadUser();
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
     }, []);
 
     if (isLoading) {

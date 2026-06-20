@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, ExternalLink, Lightbulb, Heart } from 'lucide-react';
+// import { FileText, ExternalLink, Lightbulb, Heart } from 'lucide-react';
+import { FileText, Heart } from 'lucide-react';
 
 const Sobre = () => {
     return (
@@ -38,26 +39,17 @@ const Sobre = () => {
 
                     <div className="space-y-1">
                         <p>
-                            <strong>Autor:</strong>{' '}
-                            <a
-                                href="mailto:guedes.igor018@gmail.com"
-                                className="text-primary hover:underline"
-                            >
-                                Ígor Almeida Guedes
-                            </a>
+                            <strong>Autor:</strong> Informação removida para
+                            avaliação cega.
                         </p>
 
                         <p>
-                            <strong>Curso:</strong> Sistemas de Informação
+                            <strong>Curso:</strong> Informação removida para
+                            avaliação cega.
                         </p>
                         <p>
-                            <strong>Orientador:</strong>{' '}
-                            <a
-                                href="mailto:ronney.castro@ufjf.br"
-                                className="text-primary hover:underline"
-                            >
-                                Prof. Ronney Moreira de Castro
-                            </a>
+                            <strong>Orientador:</strong> Informação removida
+                            para avaliação cega.
                         </p>
                         <p>
                             <strong>Base teórica:</strong> Hexágono Didático da
@@ -73,7 +65,7 @@ const Sobre = () => {
                 </CardContent>
             </Card>
 
-            <Card className="border-primary/20 shadow-lg">
+            {/* <Card className="border-primary/20 shadow-lg">
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
                         <Lightbulb className="h-6 w-6 text-primary" />
@@ -164,7 +156,7 @@ const Sobre = () => {
                         </div>
                     </div>
                 </CardContent>
-            </Card>
+            </Card> */}
 
             <Card className="border-primary/20 shadow-lg">
                 <CardHeader>

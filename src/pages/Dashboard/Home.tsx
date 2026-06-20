@@ -36,7 +36,7 @@ const Home = () => {
                         </strong>
                         .
                     </p>
-                    <p className="text-muted-foreground leading-relaxed">
+                    {/* <p className="text-muted-foreground leading-relaxed">
                         Ele utiliza os mesmos princípios explorados nas
                         entrevistas da tese{' '}
                         <em>
@@ -45,7 +45,7 @@ const Home = () => {
                         </em>
                         , de Ronney Moreira de Castro, transformando o processo
                         em uma experiência digital interativa.
-                    </p>
+                    </p> */}
                 </CardContent>
             </Card>
 
